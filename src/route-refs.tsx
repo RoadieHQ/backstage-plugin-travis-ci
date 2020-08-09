@@ -17,6 +17,6 @@ const TravisCIIcon: FC<SvgIconProps> = props => (
 
 export const travisCIRouteRef = createRouteRef({
   icon: TravisCIIcon,
-  path: '/travis-ci/*',
+  path: '/travis-ci',
   title: 'TravisCI',
 });

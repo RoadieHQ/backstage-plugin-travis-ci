@@ -78,11 +78,6 @@ export type TravisCIBuildResponse = {
 };
 
 export class TravisCIApi {
-  apiUrl: string;
-  constructor(apiUrl: string = '/travisci/api') {
-    this.apiUrl = apiUrl;
-  }
-
   async retry(
     travisVersion: string,
     buildNumber: number,
