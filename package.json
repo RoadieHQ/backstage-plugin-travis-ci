@@ -1,8 +1,8 @@
 {
   "name": "@RoadieHQ/backstage-plugin-travis-ci",
   "version": "0.1.0",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
+  "main": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
   "license": "Apache-2.0",
   "publishConfig": {
     "access": "public",
@@ -43,8 +43,12 @@
     "@testing-library/user-event": "^12.0.7",
     "@types/jest": "^25.2.2",
     "@types/node": "^12.0.0",
+    "@typescript-eslint/eslint-plugin": "^3.8.0",
+    "@typescript-eslint/parser": "^3.8.0",
     "cypress": "^4.11.0",
+    "eslint": "^7.6.0",
     "eslint-plugin-cypress": "^2.11.1",
+    "eslint-plugin-react": "^7.20.5",
     "jest-fetch-mock": "^3.0.3",
     "msw": "^0.19.5"
   },
