@@ -1,5 +1,5 @@
 {
-  "name": "@RoadieHQ/backstage-plugin-travis-ci",
+  "name": "@roadiehq/backstage-plugin-travis-ci",
   "version": "0.1.0",
   "main": "dist/index.esm.js",
   "types": "dist/index.d.ts",
