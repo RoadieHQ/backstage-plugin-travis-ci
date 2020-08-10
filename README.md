@@ -1,6 +1,4 @@
-## Getting started
-
-# Rollbar Plugin
+# Travis CI Plugin
 
 Website: [https://travis-ci.com/](https://travis-ci.com/)
 
