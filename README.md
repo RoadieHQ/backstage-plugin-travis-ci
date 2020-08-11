@@ -1,6 +1,8 @@
-# Travis CI Plugin
+# Travis CI Plugin for Backstage
 
-Website: [https://travis-ci.com/](https://travis-ci.com/)
+![a list of builds in the Travis CI plugin for Backstage](./docs/travis-ci-plugin-1642x1027.png)
+
+[https://travis-ci.com/](https://travis-ci.com/)
 
 ## Setup
 
@@ -33,8 +35,10 @@ builder.add(travisCIApiRef, new TravisCIApi());
 ## Features
 
 - List Travis CI Builds
-- Rerun builds
+- Retrigger builds
 
 ## Links
 
-- (The Backstage homepage)[https://backstage.io]
+- [Backstage](https://backstage.io)
+- [Further instructons](https://roadie.io/backstage/plugins/travis-ci/)
+- Get hosted, managed Backstage for your company: https://roadie.io
