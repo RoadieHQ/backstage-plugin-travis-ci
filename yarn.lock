@@ -965,7 +965,7 @@
   resolved "https://registry.yarnpkg.com/@backstage/cli-common/-/cli-common-0.1.1-alpha.18.tgz#6b82f16917710da68e0a3735675e97c3a3ea8c87"
   integrity sha512-6wY4mRMCNevIWLvNbiuUW4YmLzTSo17l9VZoiK2wC70cvFXF5JEJAXyPbk+2VfcEbOM2P49iigAL+00C/QrMeA==
 
-"@backstage/cli@0.1.1-alpha.18", "@backstage/cli@^0.1.1-alpha.18":
+"@backstage/cli@^0.1.1-alpha.18":
   version "0.1.1-alpha.18"
   resolved "https://registry.yarnpkg.com/@backstage/cli/-/cli-0.1.1-alpha.18.tgz#8942b8961e048c453a0eafd5e46a3ef7cecb9b93"
   integrity sha512-y1PVxKo6fSPu+dUpByIqrfTVgRS8s2lvdlvloRKVX+pgrimh9SfLiVzmWkZXIgK1kFqgkhwqLGSCFfnoYzddVg==
@@ -1074,7 +1074,7 @@
     react-use "^15.3.3"
     zen-observable "^0.8.15"
 
-"@backstage/core@0.1.1-alpha.18", "@backstage/core@^0.1.1-alpha.18":
+"@backstage/core@^0.1.1-alpha.18":
   version "0.1.1-alpha.18"
   resolved "https://registry.yarnpkg.com/@backstage/core/-/core-0.1.1-alpha.18.tgz#a8384b6fa65af17ee76166f2e0e4922356856ec1"
   integrity sha512-7I0eaTfF30xyX4CD/bFUnXXy22zQzQbqSFFYIGLm5j/XFi3IRb6WANoFMs1hvB/BPI/rojX9oN51PfuHBS6xHg==
@@ -1103,7 +1103,7 @@
     react-syntax-highlighter "^13.2.1"
     react-use "^15.3.3"
 
-"@backstage/dev-utils@0.1.1-alpha.18":
+"@backstage/dev-utils@^0.1.1-alpha.18":
   version "0.1.1-alpha.18"
   resolved "https://registry.yarnpkg.com/@backstage/dev-utils/-/dev-utils-0.1.1-alpha.18.tgz#8309c4465450e891b2f69b0e5fb56f4bbd51bc5f"
   integrity sha512-Q8SoGfObknC/1PYDCT1hRMCz6/kIWxku7A+bpoXxJqikYPCqxVkLmjxRFgmQwRdd8UJwrzBFS1OGHtMnuqxOfw==
@@ -1155,7 +1155,7 @@
     react-router-dom "6.0.0-beta.0"
     zen-observable "^0.8.15"
 
-"@backstage/theme@0.1.1-alpha.18", "@backstage/theme@^0.1.1-alpha.18":
+"@backstage/theme@^0.1.1-alpha.18":
   version "0.1.1-alpha.18"
   resolved "https://registry.yarnpkg.com/@backstage/theme/-/theme-0.1.1-alpha.18.tgz#40adb3e798054d75ccf57c81e5fe3cb6e32cfac5"
   integrity sha512-dDTUGH/fxRGtwnR6NCK44ojlfNyFQJKVlax2CNIB/JA43+2c5G2ipDvJ8MhxDeTwwNeO+HJj1AF0AqoJcc1QdQ==
