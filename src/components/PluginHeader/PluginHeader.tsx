@@ -15,16 +15,7 @@ export const PluginHeader: FC<Props> = ({ title = 'TravisCI' }) => {
   return (
     <ContentHeader
       title={title}
-      titleComponent={() => (
-        <Box alignItems="center" display="flex">
-          {notRoot && (
-            <IconButton component={RouterLink} to="/travisci">
-              <ArrowBack />
-            </IconButton>
-          )}
-          <Typography variant="h4">{title}</Typography>
-        </Box>
-      )}
+      titleComponent={() => <Typography variant="h4">{title}</Typography>}
     >
       {!isSettingsPage && (
         <Button onClick={showSettings} startIcon={<SettingsIcon />}>

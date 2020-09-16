@@ -1,1 +1,1 @@
-export { default as BuildsPage, Builds } from './BuildsPage';
+export { Builds } from './BuildsPage';

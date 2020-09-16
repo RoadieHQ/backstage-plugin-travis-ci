@@ -1,18 +1,15 @@
+import { Page, pageTheme, Content } from '@backstage/core';
 import React from 'react';
 import { Route, MemoryRouter, Routes } from 'react-router';
-import { BuildsPage, Builds } from '../pages/BuildsPage';
+import { Builds } from '../pages/BuildsPage';
 import { AppStateProvider } from '../state';
 import { Settings } from './Settings';
 
 export const App = () => {
   return (
     <AppStateProvider>
-      <>
-        <Routes>
-          <Route path="/" element={<BuildsPage />} />
-        </Routes>
-        <Settings />
-      </>
+      <Builds />
+      <Settings />
     </AppStateProvider>
   );
 };
@@ -24,12 +21,10 @@ export const TravisCIWidget = () => {
   return (
     <MemoryRouter initialEntries={['/travisci']}>
       <AppStateProvider>
-        <>
-          <Routes>
-            <Route path="/travisci" element={<Builds />} />
-          </Routes>
-          <Settings />
-        </>
+        <Routes>
+          <Route path="/travisci" element={<Builds />} />
+        </Routes>
+        <Settings />
       </AppStateProvider>
     </MemoryRouter>
   );

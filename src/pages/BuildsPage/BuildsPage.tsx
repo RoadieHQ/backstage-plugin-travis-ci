@@ -1,20 +1,10 @@
 import React, { FC, useState, useCallback } from 'react';
-import { Content } from '@backstage/core';
 import { Grid, Snackbar } from '@material-ui/core';
 import { Builds as BuildsComp } from './lib/Builds';
-import { Layout } from '../../components/Layout';
 import { PluginHeader } from '../../components/PluginHeader';
 import { Alert } from '@material-ui/lab';
 
-const BuildsPage: FC<{}> = () => (
-  <Layout>
-    <Content>
-      <Builds />
-    </Content>
-  </Layout>
-);
-
-const Builds = () => {
+export const Builds: FC = () => {
   const [restarted, setRestarted] = useState(false);
   const handleRestart = useCallback(() => {
     setRestarted(true);
@@ -39,6 +29,3 @@ const Builds = () => {
     </>
   );
 };
-
-export default BuildsPage;
-export { Builds };
