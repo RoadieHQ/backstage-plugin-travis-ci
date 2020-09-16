@@ -1,10 +1,7 @@
-import { createPlugin } from '@backstage/core';
-import { App } from './components/App';
-import { travisCIRouteRef } from './route-refs';
+import { createApiFactory, createPlugin } from '@backstage/core';
+import { TravisCIApi, travisCIApiRef } from './api';
 
 export const plugin = createPlugin({
   id: 'travisci',
-  register({ router }) {
-    router.addRoute(travisCIRouteRef, App, { exact: false });
-  },
+  apis: [createApiFactory(travisCIApiRef, new TravisCIApi())],
 });

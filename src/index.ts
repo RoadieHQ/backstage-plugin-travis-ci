@@ -1,4 +1,4 @@
 export { plugin } from './plugin';
 export * from './api';
-export * from './route-refs';
+export * from './Router';
 export { TravisCIWidget } from './components/App';
