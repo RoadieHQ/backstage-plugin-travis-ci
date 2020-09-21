@@ -3,7 +3,6 @@ import { useCallback } from 'react';
 import { useAsyncRetry } from 'react-use';
 import { travisCIApiRef } from '../api/index';
 import { useAsyncPolling } from './useAsyncPolling';
-import { useSettings } from './useSettings';
 import { useTravisRepoData } from './useTravisRepoData';
 
 const INTERVAL_AMOUNT = 1500;
