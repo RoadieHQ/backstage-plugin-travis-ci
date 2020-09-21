@@ -1,31 +1,32 @@
-import { Page, pageTheme, Content } from '@backstage/core';
+import { Entity } from '@backstage/catalog-model';
 import React from 'react';
 import { Route, MemoryRouter, Routes } from 'react-router';
-import { Builds } from '../pages/BuildsPage';
-import { AppStateProvider } from '../state';
-import { Settings } from './Settings';
+import { Builds } from '../components/BuildsPage';
+import { ContextProvider } from './ContextProvider';
 
-export const App = () => {
+type Props = {
+  entity: Entity;
+};
+
+export const App: React.FC<Props> = ({ entity }) => {
   return (
-    <AppStateProvider>
+    <ContextProvider entity={entity}>
       <Builds />
-      <Settings />
-    </AppStateProvider>
+    </ContextProvider>
   );
 };
 
 // TODO: allow pass in settings as props
 // When some shared settings workflow
 // will be established
-export const TravisCIWidget = () => {
+export const TravisCIWidget = (entity: Entity) => {
   return (
     <MemoryRouter initialEntries={['/travisci']}>
-      <AppStateProvider>
+      <ContextProvider entity={entity}>
         <Routes>
           <Route path="/travisci" element={<Builds />} />
         </Routes>
-        <Settings />
-      </AppStateProvider>
+      </ContextProvider>
     </MemoryRouter>
   );
 };

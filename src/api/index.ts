@@ -91,11 +91,11 @@ export class TravisCIApi {
 
   async getBuilds(
     {
-      travisVersion,
+      travisDomain,
       limit = 10,
       offset = 0,
     }: {
-      travisVersion: string;
+      travisDomain: string;
       limit: number;
       offset: number;
     },
@@ -103,16 +103,20 @@ export class TravisCIApi {
   ) {
     const repoSlug = encodeURIComponent(`${owner}/${repo}`);
 
-    const response = await (
-      await fetch(
-        `https://api.${travisVersion}/repo/${repoSlug}/builds?offset=${offset}&limit=${limit}`,
-        {
-          headers: createHeaders(token),
-        },
-      )
-    ).json();
+    const response = await fetch(
+      `https://api.${travisDomain}/repo/${repoSlug}/builds?offset=${offset}&limit=${limit}`,
+      {
+        headers: createHeaders(token),
+      },
+    );
 
-    return response.builds;
+    if (!response.ok) {
+      throw new Error(
+        `error while fetching travis builds: ${response.status}: ${response.statusText}`,
+      );
+    }
+
+    return (await response.json()).builds;
   }
 
   async getUser(token: string) {

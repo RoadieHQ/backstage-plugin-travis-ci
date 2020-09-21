@@ -1,4 +1,3 @@
-import { Entity } from '@backstage/catalog-model';
 /*
  * Copyright 2020 RoadieHQ
  *
@@ -15,15 +14,12 @@ import { Entity } from '@backstage/catalog-model';
  * limitations under the License.
  */
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { App } from './components/App';
+import { StateContext } from '../components/ContextProvider';
 
-type Props = { entity: Entity };
-
-export const Router: React.FC<Props> = ({ entity }: Props) => {
-  return (
-    <Routes>
-      <Route path="/" element={<App entity={entity} />} />
-    </Routes>
-  );
+export const useSettings = () => {
+  const context = React.useContext(StateContext);
+  if (context === undefined) {
+    throw new Error("You must use 'useSettings' hook inside ContextProvider");
+  }
+  return context;
 };

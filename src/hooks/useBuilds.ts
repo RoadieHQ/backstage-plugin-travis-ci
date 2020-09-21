@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useAsyncRetry } from 'react-use';
 import { travisCIApiRef, TravisCIBuildResponse } from '../api/index';
 import { BASE_URL } from '../api/constants';
-import { useSettings } from './useSettings';
+import { useTravisRepoData } from './useTravisRepoData';
 
 type Build = {
   id: string;
@@ -72,8 +72,9 @@ export const transform = (
 };
 
 export function useBuilds() {
-  const [{ repo, owner, token, travisVersion }] = useSettings();
+  const { domain, owner, repo } = useTravisRepoData();
   const projectName = `${owner}/${repo}`;
+  const token = domain;
 
   const api = useApi(travisCIApiRef);
   const errorApi = useApi(errorApiRef);
@@ -90,7 +91,7 @@ export function useBuilds() {
 
       try {
         return await api.getBuilds(
-          { travisVersion, limit, offset },
+          { travisDomain: domain, limit, offset },
           { token, owner, repo },
         );
       } catch (e) {
@@ -98,12 +99,12 @@ export function useBuilds() {
         return Promise.reject(e);
       }
     },
-    [travisVersion, repo, token, owner, api, errorApi],
+    [domain, repo, token, owner, api, errorApi],
   );
 
   const restartBuild = async (buildId: number) => {
     try {
-      await api.retry(travisVersion, buildId, {
+      await api.retry(domain, buildId, {
         token: token,
       });
     } catch (e) {

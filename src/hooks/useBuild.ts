@@ -4,10 +4,12 @@ import { useAsyncRetry } from 'react-use';
 import { travisCIApiRef } from '../api/index';
 import { useAsyncPolling } from './useAsyncPolling';
 import { useSettings } from './useSettings';
+import { useTravisRepoData } from './useTravisRepoData';
 
 const INTERVAL_AMOUNT = 1500;
 export function useBuild(buildId: number) {
-  const [{ token, repo, owner, travisVersion }] = useSettings();
+  const { domain, owner, repo } = useTravisRepoData();
+  const token = domain;
   const api = useApi(travisCIApiRef);
   const errorApi = useApi(errorApiRef);
 
@@ -35,7 +37,7 @@ export function useBuild(buildId: number) {
 
   const restartBuild = async () => {
     try {
-      await api.retry(travisVersion, buildId, {
+      await api.retry(domain, buildId, {
         token: token,
       });
     } catch (e) {
