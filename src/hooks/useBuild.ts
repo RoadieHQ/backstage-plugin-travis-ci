@@ -18,15 +18,7 @@ export function useBuild(buildId: number) {
     }
 
     try {
-      const options = {
-        token: token,
-        vcs: {
-          owner: owner,
-          repo: repo,
-          type: 'github',
-        },
-      };
-      const build = await api.getBuild(buildId, options);
+      const build = await api.getBuild(buildId);
       return Promise.resolve(build);
     } catch (e) {
       errorApi.post(e);
@@ -36,9 +28,7 @@ export function useBuild(buildId: number) {
 
   const restartBuild = async () => {
     try {
-      await api.retry(domain, buildId, {
-        token: token,
-      });
+      await api.retry(domain, buildId);
     } catch (e) {
       errorApi.post(e);
     }

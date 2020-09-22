@@ -99,7 +99,7 @@ export function useBuilds() {
         return Promise.reject(e);
       }
     },
-    [domain, repo, owner, api, errorApi],
+    [domain, repo, owner, api, errorApi, configApi],
   );
 
   const restartBuild = async (buildId: number) => {

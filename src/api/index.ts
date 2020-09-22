@@ -115,7 +115,7 @@ export class TravisCIApi {
     return (await response.json()).builds;
   }
 
-  async getUser(token: string) {
+  async getUser() {
     return await (
       await fetch(`${API_BASE_URL}user`, {
         headers: new Headers({
@@ -125,10 +125,7 @@ export class TravisCIApi {
     ).json();
   }
 
-  async getBuild(
-    buildId: number,
-    { token }: { token: string },
-  ): Promise<TravisCIBuildResponse> {
+  async getBuild(buildId: number): Promise<TravisCIBuildResponse> {
     const response = await fetch(`${API_BASE_URL}build/${buildId}`, {
       headers: new Headers({
         'Travis-API-Version': '3',
