@@ -1,4 +1,5 @@
 import { Entity } from '@backstage/catalog-model';
+import { WarningPanel } from '@backstage/core';
 /*
  * Copyright 2020 RoadieHQ
  *
@@ -17,13 +18,20 @@ import { Entity } from '@backstage/catalog-model';
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { App } from './components/App';
+import { TRAVIS_ANNOTATION } from './hooks/useTravisRepoData';
 
 type Props = { entity: Entity };
 
-export const Router: React.FC<Props> = ({ entity }: Props) => {
-  return (
+export const isPluginApplicableToEntity = (entity: Entity) =>
+  Boolean(entity?.metadata.annotations?.[TRAVIS_ANNOTATION]);
+
+export const Router: React.FC<Props> = ({ entity }) =>
+  !isPluginApplicableToEntity(entity) ? (
+    <WarningPanel title="Firebase functions plugin:">
+      <pre>{TRAVIS_ANNOTATION}</pre> annotation is missing on the entity.
+    </WarningPanel>
+  ) : (
     <Routes>
       <Route path="/" element={<App entity={entity} />} />
     </Routes>
   );
-};
