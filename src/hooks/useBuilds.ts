@@ -1,4 +1,4 @@
-import { errorApiRef, useApi } from '@backstage/core';
+import { configApiRef, errorApiRef, useApi } from '@backstage/core';
 import { useCallback, useEffect, useState } from 'react';
 import { useAsyncRetry } from 'react-use';
 import { travisCIApiRef, TravisCIBuildResponse } from '../api/index';
@@ -74,10 +74,10 @@ export const transform = (
 export function useBuilds() {
   const { domain, owner, repo } = useTravisRepoData();
   const projectName = `${owner}/${repo}`;
-  const token = domain;
 
   const api = useApi(travisCIApiRef);
   const errorApi = useApi(errorApiRef);
+  const configApi = useApi(configApiRef);
 
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(0);
@@ -85,28 +85,26 @@ export function useBuilds() {
 
   const getBuilds = useCallback(
     async ({ limit, offset }: { limit: number; offset: number }) => {
-      if (token === '') {
-        return Promise.reject('No credentials provided');
-      }
-
       try {
-        return await api.getBuilds(
-          { travisDomain: domain, limit, offset },
-          { token, owner, repo },
-        );
+        return await api.getBuilds({
+          address: configApi.getString('backend.baseUrl'),
+          travisDomain: domain,
+          limit,
+          offset,
+          owner,
+          repo,
+        });
       } catch (e) {
         errorApi.post(e);
         return Promise.reject(e);
       }
     },
-    [domain, repo, token, owner, api, errorApi],
+    [domain, repo, owner, api, errorApi],
   );
 
   const restartBuild = async (buildId: number) => {
     try {
-      await api.retry(domain, buildId, {
-        token: token,
-      });
+      await api.retry(domain, buildId);
     } catch (e) {
       errorApi.post(e);
     }

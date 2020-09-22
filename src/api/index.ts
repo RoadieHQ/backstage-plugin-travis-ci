@@ -1,13 +1,6 @@
 import { createApiRef } from '@backstage/core';
 import { API_BASE_URL } from './constants';
 
-function createHeaders(token: string) {
-  return new Headers({
-    Authorization: `token ${token}`,
-    'Travis-API-Version': '3',
-  });
-}
-
 export const travisCIApiRef = createApiRef<TravisCIApi>({
   id: 'plugin.travisci.service',
   description: 'Used by the TravisCI plugin to make requests',
@@ -77,36 +70,39 @@ export type TravisCIBuildResponse = {
   updated_at: string;
 };
 
+type FetchParams = {
+  address: string;
+  travisDomain: string;
+  limit: number;
+  offset: number;
+  owner: string;
+  repo: string;
+};
+
 export class TravisCIApi {
-  async retry(
-    travisVersion: string,
-    buildNumber: number,
-    { token }: { token: string },
-  ) {
+  async retry(travisVersion: string, buildNumber: number) {
     return fetch(`https://api.${travisVersion}/build/${buildNumber}/restart`, {
-      headers: createHeaders(token),
       method: 'post',
     });
   }
 
-  async getBuilds(
-    {
-      travisDomain,
-      limit = 10,
-      offset = 0,
-    }: {
-      travisDomain: string;
-      limit: number;
-      offset: number;
-    },
-    { token, owner, repo }: { token: string; owner: string; repo: string },
-  ) {
+  async getBuilds({
+    address,
+    travisDomain,
+    limit = 10,
+    offset = 0,
+    owner,
+    repo,
+  }: FetchParams) {
     const repoSlug = encodeURIComponent(`${owner}/${repo}`);
-
     const response = await fetch(
-      `https://api.${travisDomain}/repo/${repoSlug}/builds?offset=${offset}&limit=${limit}`,
+      `${address}/proxy/travisci${
+        travisDomain === 'travis-ci.com' ? 'com' : 'org'
+      }/api/repo/${repoSlug}/builds?offset=${offset}&limit=${limit}`,
       {
-        headers: createHeaders(token),
+        headers: new Headers({
+          'Travis-API-Version': '3',
+        }),
       },
     );
 
@@ -122,7 +118,9 @@ export class TravisCIApi {
   async getUser(token: string) {
     return await (
       await fetch(`${API_BASE_URL}user`, {
-        headers: createHeaders(token),
+        headers: new Headers({
+          'Travis-API-Version': '3',
+        }),
       })
     ).json();
   }
@@ -132,7 +130,9 @@ export class TravisCIApi {
     { token }: { token: string },
   ): Promise<TravisCIBuildResponse> {
     const response = await fetch(`${API_BASE_URL}build/${buildId}`, {
-      headers: createHeaders(token),
+      headers: new Headers({
+        'Travis-API-Version': '3',
+      }),
     });
 
     return response.json();
