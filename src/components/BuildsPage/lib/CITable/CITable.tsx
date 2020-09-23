@@ -36,7 +36,7 @@ export type CITableBuildInfo = {
   onRestartClick: () => void;
 };
 
-const getStatusComponent = (status: string | undefined = '') => {
+export const getStatusComponent = (status: string | undefined = '') => {
   switch (status.toLowerCase()) {
     case 'queued':
     case 'created':

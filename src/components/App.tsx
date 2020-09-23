@@ -1,8 +1,8 @@
 import { Entity } from '@backstage/catalog-model';
 import React from 'react';
-import { Route, MemoryRouter, Routes } from 'react-router';
 import { Builds } from '../components/BuildsPage';
 import { ContextProvider } from './ContextProvider';
+import { LastBuildCard } from './LastBuildCard';
 
 type Props = {
   entity: Entity;
@@ -16,17 +16,10 @@ export const App: React.FC<Props> = ({ entity }) => {
   );
 };
 
-// TODO: allow pass in settings as props
-// When some shared settings workflow
-// will be established
-export const TravisCIWidget = (entity: Entity) => {
+export const TravisCIWidget: React.FC<Props> = ({ entity }) => {
   return (
-    <MemoryRouter initialEntries={['/travisci']}>
-      <ContextProvider entity={entity}>
-        <Routes>
-          <Route path="/travisci" element={<Builds />} />
-        </Routes>
-      </ContextProvider>
-    </MemoryRouter>
+    <ContextProvider entity={entity}>
+      <LastBuildCard />
+    </ContextProvider>
   );
 };
