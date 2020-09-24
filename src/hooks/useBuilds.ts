@@ -72,8 +72,7 @@ export const transform = (
 };
 
 export function useBuilds() {
-  const { domain, owner, repo } = useTravisRepoData();
-  const projectName = `${owner}/${repo}`;
+  const repoSlug = useTravisRepoData();
 
   const api = useApi(travisCIApiRef);
   const errorApi = useApi(errorApiRef);
@@ -87,24 +86,21 @@ export function useBuilds() {
     async ({ limit, offset }: { limit: number; offset: number }) => {
       try {
         return await api.getBuilds({
-          address: configApi.getString('backend.baseUrl'),
-          travisDomain: domain,
           limit,
           offset,
-          owner,
-          repo,
+          repoSlug,
         });
       } catch (e) {
         errorApi.post(e);
         return Promise.reject(e);
       }
     },
-    [domain, repo, owner, api, errorApi, configApi],
+    [repoSlug, api, errorApi, configApi],
   );
 
   const restartBuild = async (buildId: number) => {
     try {
-      await api.retry(domain, buildId);
+      await api.retry(buildId);
     } catch (e) {
       errorApi.post(e);
     }
@@ -112,14 +108,14 @@ export function useBuilds() {
 
   useEffect(() => {
     getBuilds({ limit: 1, offset: 0 }).then(b => setTotal(b?.[0].build_num!));
-  }, [repo, getBuilds]);
+  }, [repoSlug, getBuilds]);
 
   const { loading, value, retry } = useAsyncRetry(
     () =>
       getBuilds({
         offset: page * pageSize,
         limit: pageSize,
-      }).then(builds => transform(builds ?? [], restartBuild, projectName)),
+      }).then(builds => transform(builds ?? [], restartBuild, repoSlug)),
     [page, pageSize, getBuilds],
   );
 
@@ -129,7 +125,7 @@ export function useBuilds() {
       pageSize,
       loading,
       value,
-      projectName,
+      projectName: repoSlug,
       total,
     },
     {

@@ -7,16 +7,11 @@ import { useTravisRepoData } from './useTravisRepoData';
 
 const INTERVAL_AMOUNT = 1500;
 export function useBuild(buildId: number) {
-  const { domain, owner, repo } = useTravisRepoData();
-  const token = domain;
+  const repoSlug = useTravisRepoData();
   const api = useApi(travisCIApiRef);
   const errorApi = useApi(errorApiRef);
 
   const getBuild = useCallback(async () => {
-    if (owner === '' || repo === '' || token === '') {
-      return Promise.reject('No credentials provided');
-    }
-
     try {
       const build = await api.getBuild(buildId);
       return Promise.resolve(build);
@@ -24,11 +19,11 @@ export function useBuild(buildId: number) {
       errorApi.post(e);
       return Promise.reject(e);
     }
-  }, [token, owner, repo, buildId, api, errorApi]);
+  }, [repoSlug, buildId, api, errorApi]);
 
   const restartBuild = async () => {
     try {
-      await api.retry(domain, buildId);
+      await api.retry(buildId);
     } catch (e) {
       errorApi.post(e);
     }

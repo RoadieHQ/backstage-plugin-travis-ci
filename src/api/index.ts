@@ -71,34 +71,35 @@ export type TravisCIBuildResponse = {
 };
 
 type FetchParams = {
-  address: string;
-  travisDomain: string;
   limit: number;
   offset: number;
-  owner: string;
-  repo: string;
+  repoSlug: string;
 };
 
 export class TravisCIApi {
-  async retry(travisVersion: string, buildNumber: number) {
-    return fetch(`https://api.${travisVersion}/build/${buildNumber}/restart`, {
-      method: 'post',
-    });
+  baseUrl: string;
+
+  constructor(baseUrl: string = 'http://localhost:7000') {
+    this.baseUrl = baseUrl;
   }
 
-  async getBuilds({
-    address,
-    travisDomain,
-    limit = 10,
-    offset = 0,
-    owner,
-    repo,
-  }: FetchParams) {
-    const repoSlug = encodeURIComponent(`${owner}/${repo}`);
+  async retry(buildNumber: number) {
+    return fetch(
+      `${this.baseUrl}${API_BASE_URL}/build/${buildNumber}/restart`,
+      {
+        method: 'post',
+        headers: new Headers({
+          'Travis-API-Version': '3',
+        }),
+      },
+    );
+  }
+
+  async getBuilds({ limit = 10, offset = 0, repoSlug }: FetchParams) {
     const response = await fetch(
-      `${address}/proxy/travisci${
-        travisDomain === 'travis-ci.com' ? 'com' : 'org'
-      }/api/repo/${repoSlug}/builds?offset=${offset}&limit=${limit}`,
+      `${this.baseUrl}${API_BASE_URL}/repo/${encodeURIComponent(
+        repoSlug,
+      )}/builds?offset=${offset}&limit=${limit}`,
       {
         headers: new Headers({
           'Travis-API-Version': '3',
@@ -126,11 +127,14 @@ export class TravisCIApi {
   }
 
   async getBuild(buildId: number): Promise<TravisCIBuildResponse> {
-    const response = await fetch(`${API_BASE_URL}build/${buildId}`, {
-      headers: new Headers({
-        'Travis-API-Version': '3',
-      }),
-    });
+    const response = await fetch(
+      `${this.baseUrl}${API_BASE_URL}/build/${buildId}`,
+      {
+        headers: new Headers({
+          'Travis-API-Version': '3',
+        }),
+      },
+    );
 
     return response.json();
   }

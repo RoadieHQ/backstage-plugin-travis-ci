@@ -25,12 +25,8 @@ export const useTravisRepoData = () => {
     throw new Error("'Travis-ci.com' annottation is missing");
   }
   const slugElements = travisSlug.split('/').map(p => p.trim());
-  if (slugElements.length < 5) {
+  if (slugElements.length < 2) {
     throw new Error("'Travis-ci.com' annottation is missing");
   }
-  return {
-    domain: slugElements[1],
-    owner: slugElements[3],
-    repo: slugElements[5],
-  };
+  return travisSlug;
 };
