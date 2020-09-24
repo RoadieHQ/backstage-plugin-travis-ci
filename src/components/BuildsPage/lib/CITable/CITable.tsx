@@ -11,7 +11,7 @@ import {
   TableColumn,
 } from '@backstage/core';
 import formatDistance from 'date-fns/formatDistance';
-import { TravisIcon } from './travisicon';
+import { TravisIcon } from './travisIcon';
 
 export type CITableBuildInfo = {
   id: string;
