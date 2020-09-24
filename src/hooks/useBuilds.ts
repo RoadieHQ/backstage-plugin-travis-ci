@@ -5,7 +5,7 @@ import { travisCIApiRef, TravisCIBuildResponse } from '../api/index';
 import { BASE_URL } from '../api/constants';
 import { useTravisRepoData } from './useTravisRepoData';
 
-type Build = {
+export type Build = {
   id: string;
   buildName: string;
   onRestartClick: () => false | Promise<void>;

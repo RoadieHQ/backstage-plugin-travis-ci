@@ -91,6 +91,7 @@ const generatedColumns: TableColumn[] = [
         <Typography variant="button">{row.status}</Typography>
       </Box>
     ),
+    width: '150px',
     sorting: false,
   },
   {
@@ -103,6 +104,7 @@ const generatedColumns: TableColumn[] = [
         </>
       );
     },
+    width: '150px',
     sorting: false,
   },
   {
@@ -112,7 +114,7 @@ const generatedColumns: TableColumn[] = [
         <RetryIcon />
       </IconButton>
     ),
-    width: '10%',
+    width: '100px',
     sorting: false,
   },
 ];
