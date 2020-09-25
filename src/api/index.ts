@@ -79,25 +79,22 @@ type FetchParams = {
 export class TravisCIApi {
   baseUrl: string;
 
-  constructor(baseUrl: string = 'http://localhost:7000') {
-    this.baseUrl = baseUrl;
+  constructor(backendUrl: string = 'http://localhost:7000') {
+    this.baseUrl = backendUrl + API_BASE_URL;
   }
 
   async retry(buildNumber: number) {
-    return fetch(
-      `${this.baseUrl}${API_BASE_URL}/build/${buildNumber}/restart`,
-      {
-        method: 'post',
-        headers: new Headers({
-          'Travis-API-Version': '3',
-        }),
-      },
-    );
+    return fetch(`${this.baseUrl}/build/${buildNumber}/restart`, {
+      method: 'post',
+      headers: new Headers({
+        'Travis-API-Version': '3',
+      }),
+    });
   }
 
   async getBuilds({ limit = 10, offset = 0, repoSlug }: FetchParams) {
     const response = await fetch(
-      `${this.baseUrl}${API_BASE_URL}/repo/${encodeURIComponent(
+      `${this.baseUrl}/repo/${encodeURIComponent(
         repoSlug,
       )}/builds?offset=${offset}&limit=${limit}`,
       {
@@ -118,7 +115,7 @@ export class TravisCIApi {
 
   async getUser() {
     return await (
-      await fetch(`${API_BASE_URL}user`, {
+      await fetch(`${this.baseUrl}/user`, {
         headers: new Headers({
           'Travis-API-Version': '3',
         }),
@@ -127,14 +124,11 @@ export class TravisCIApi {
   }
 
   async getBuild(buildId: number): Promise<TravisCIBuildResponse> {
-    const response = await fetch(
-      `${this.baseUrl}${API_BASE_URL}/build/${buildId}`,
-      {
-        headers: new Headers({
-          'Travis-API-Version': '3',
-        }),
-      },
-    );
+    const response = await fetch(`${this.baseUrl}/build/${buildId}`, {
+      headers: new Headers({
+        'Travis-API-Version': '3',
+      }),
+    });
 
     return response.json();
   }

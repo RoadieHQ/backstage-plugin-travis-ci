@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Typography, Box, IconButton } from '@material-ui/core';
+import { Typography, Box, IconButton, Link } from '@material-ui/core';
 import RetryIcon from '@material-ui/icons/Replay';
 import {
   StatusError,
@@ -66,9 +66,9 @@ const generatedColumns: TableColumn[] = [
     field: 'buildName',
     highlight: true,
     render: (row: Partial<CITableBuildInfo>) => (
-      <a href={row.buildUrl} target="_blank" rel="noopener noreferrer">
+      <Link href={row.buildUrl} target="_blank" rel="noopener noreferrer">
         {row.buildName}
-      </a>
+      </Link>
     ),
     sorting: false,
   },
