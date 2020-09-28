@@ -1,13 +1,6 @@
 import { createApiRef } from '@backstage/core';
 import { API_BASE_URL } from './constants';
 
-function createHeaders(token: string) {
-  return new Headers({
-    Authorization: `token ${token}`,
-    'Travis-API-Version': '3',
-  });
-}
-
 export const travisCIApiRef = createApiRef<TravisCIApi>({
   id: 'plugin.travisci.service',
   description: 'Used by the TravisCI plugin to make requests',
@@ -77,58 +70,64 @@ export type TravisCIBuildResponse = {
   updated_at: string;
 };
 
+type FetchParams = {
+  limit: number;
+  offset: number;
+  repoSlug: string;
+};
+
 export class TravisCIApi {
-  async retry(
-    travisVersion: string,
-    buildNumber: number,
-    { token }: { token: string },
-  ) {
-    return fetch(`https://api.${travisVersion}/build/${buildNumber}/restart`, {
-      headers: createHeaders(token),
+  baseUrl: string;
+
+  constructor(backendUrl: string = 'http://localhost:7000') {
+    this.baseUrl = backendUrl + API_BASE_URL;
+  }
+
+  async retry(buildNumber: number) {
+    return fetch(`${this.baseUrl}/build/${buildNumber}/restart`, {
       method: 'post',
+      headers: new Headers({
+        'Travis-API-Version': '3',
+      }),
     });
   }
 
-  async getBuilds(
-    {
-      travisVersion,
-      limit = 10,
-      offset = 0,
-    }: {
-      travisVersion: string;
-      limit: number;
-      offset: number;
-    },
-    { token, owner, repo }: { token: string; owner: string; repo: string },
-  ) {
-    const repoSlug = encodeURIComponent(`${owner}/${repo}`);
+  async getBuilds({ limit = 10, offset = 0, repoSlug }: FetchParams) {
+    const response = await fetch(
+      `${this.baseUrl}/repo/${encodeURIComponent(
+        repoSlug,
+      )}/builds?offset=${offset}&limit=${limit}`,
+      {
+        headers: new Headers({
+          'Travis-API-Version': '3',
+        }),
+      },
+    );
 
-    const response = await (
-      await fetch(
-        `https://api.${travisVersion}/repo/${repoSlug}/builds?offset=${offset}&limit=${limit}`,
-        {
-          headers: createHeaders(token),
-        },
-      )
-    ).json();
+    if (!response.ok) {
+      throw new Error(
+        `error while fetching travis builds: ${response.status}: ${response.statusText}`,
+      );
+    }
 
-    return response.builds;
+    return (await response.json()).builds;
   }
 
-  async getUser(token: string) {
+  async getUser() {
     return await (
-      await fetch(`${API_BASE_URL}user`, {
-        headers: createHeaders(token),
+      await fetch(`${this.baseUrl}/user`, {
+        headers: new Headers({
+          'Travis-API-Version': '3',
+        }),
       })
     ).json();
   }
 
-  async getBuild(
-    buildId: number,
-    { token }: { token: string },
-  ): Promise<TravisCIBuildResponse> {
-    const response = await fetch(`${API_BASE_URL}build/${buildId}`, {
-      headers: createHeaders(token),
+  async getBuild(buildId: number): Promise<TravisCIBuildResponse> {
+    const response = await fetch(`${this.baseUrl}/build/${buildId}`, {
+      headers: new Headers({
+        'Travis-API-Version': '3',
+      }),
     });
 
     return response.json();

@@ -1,20 +1,10 @@
 import React, { FC, useState, useCallback } from 'react';
-import { Content } from '@backstage/core';
-import { Grid, Snackbar } from '@material-ui/core';
+import { Snackbar } from '@material-ui/core';
 import { Builds as BuildsComp } from './lib/Builds';
-import { Layout } from '../../components/Layout';
-import { PluginHeader } from '../../components/PluginHeader';
 import { Alert } from '@material-ui/lab';
+import { ContentHeader, SupportButton } from '@backstage/core';
 
-const BuildsPage: FC<{}> = () => (
-  <Layout>
-    <Content>
-      <Builds />
-    </Content>
-  </Layout>
-);
-
-const Builds = () => {
+export const Builds: FC = () => {
   const [restarted, setRestarted] = useState(false);
   const handleRestart = useCallback(() => {
     setRestarted(true);
@@ -30,15 +20,13 @@ const Builds = () => {
       >
         <Alert severity="success">Build Restarted.</Alert>
       </Snackbar>
-      <PluginHeader title="All builds" />
-      <Grid container spacing={3} direction="column">
-        <Grid item>
-          <BuildsComp onRestart={handleRestart} />
-        </Grid>
-      </Grid>
+      <ContentHeader title="All builds">
+        <SupportButton email="info@roadie.io" slackChannel="#roadie">
+          This plugin allows you to view and interact with your builds within
+          the Travis CI environment.
+        </SupportButton>
+      </ContentHeader>
+      <BuildsComp onRestart={handleRestart} />
     </>
   );
 };
-
-export default BuildsPage;
-export { Builds };

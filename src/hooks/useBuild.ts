@@ -3,41 +3,25 @@ import { useCallback } from 'react';
 import { useAsyncRetry } from 'react-use';
 import { travisCIApiRef } from '../api/index';
 import { useAsyncPolling } from './useAsyncPolling';
-import { useSettings } from './useSettings';
 
 const INTERVAL_AMOUNT = 1500;
 export function useBuild(buildId: number) {
-  const [{ token, repo, owner, travisVersion }] = useSettings();
   const api = useApi(travisCIApiRef);
   const errorApi = useApi(errorApiRef);
 
   const getBuild = useCallback(async () => {
-    if (owner === '' || repo === '' || token === '') {
-      return Promise.reject('No credentials provided');
-    }
-
     try {
-      const options = {
-        token: token,
-        vcs: {
-          owner: owner,
-          repo: repo,
-          type: 'github',
-        },
-      };
-      const build = await api.getBuild(buildId, options);
+      const build = await api.getBuild(buildId);
       return Promise.resolve(build);
     } catch (e) {
       errorApi.post(e);
       return Promise.reject(e);
     }
-  }, [token, owner, repo, buildId, api, errorApi]);
+  }, [buildId, api, errorApi]);
 
   const restartBuild = async () => {
     try {
-      await api.retry(travisVersion, buildId, {
-        token: token,
-      });
+      await api.retry(buildId);
     } catch (e) {
       errorApi.post(e);
     }

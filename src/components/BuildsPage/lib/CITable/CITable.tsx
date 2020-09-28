@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
-import { Typography, Box, IconButton } from '@material-ui/core';
+import { Typography, Box, IconButton, Link } from '@material-ui/core';
 import RetryIcon from '@material-ui/icons/Replay';
-import GitHubIcon from '@material-ui/icons/GitHub';
 import {
   StatusError,
   StatusWarning,
@@ -12,6 +11,7 @@ import {
   TableColumn,
 } from '@backstage/core';
 import formatDistance from 'date-fns/formatDistance';
+import { TravisIcon } from './travisIcon';
 
 export type CITableBuildInfo = {
   id: string;
@@ -37,7 +37,7 @@ export type CITableBuildInfo = {
   onRestartClick: () => void;
 };
 
-const getStatusComponent = (status: string | undefined = '') => {
+export const getStatusComponent = (status: string | undefined = '') => {
   switch (status.toLowerCase()) {
     case 'queued':
     case 'created':
@@ -66,9 +66,9 @@ const generatedColumns: TableColumn[] = [
     field: 'buildName',
     highlight: true,
     render: (row: Partial<CITableBuildInfo>) => (
-      <a href={row.buildUrl} target="_blank" rel="noopener noreferrer">
+      <Link href={row.buildUrl} target="_blank" rel="noopener noreferrer">
         {row.buildName}
-      </a>
+      </Link>
     ),
     sorting: false,
   },
@@ -91,6 +91,7 @@ const generatedColumns: TableColumn[] = [
         <Typography variant="button">{row.status}</Typography>
       </Box>
     ),
+    width: '150px',
     sorting: false,
   },
   {
@@ -103,6 +104,7 @@ const generatedColumns: TableColumn[] = [
         </>
       );
     },
+    width: '150px',
     sorting: false,
   },
   {
@@ -112,7 +114,7 @@ const generatedColumns: TableColumn[] = [
         <RetryIcon />
       </IconButton>
     ),
-    width: '10%',
+    width: '100px',
     sorting: false,
   },
 ];
@@ -160,7 +162,7 @@ export const CITable: FC<Props> = ({
         onChangeRowsPerPage={onChangePageSize}
         title={
           <Box display="flex" alignItems="center">
-            <GitHubIcon />
+            <TravisIcon />
             <Box mr={1} />
             <Typography variant="h6">{projectName}</Typography>
           </Box>

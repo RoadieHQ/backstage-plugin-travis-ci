@@ -1,6 +1,6 @@
 import React, { FC, useMemo } from 'react';
+import { useBuilds } from '../../../../hooks/useBuilds';
 import { CITable } from '../CITable';
-import { useBuilds } from '../../../../state';
 
 export const Builds: FC<{ onRestart: () => void }> = ({ onRestart }) => {
   const [

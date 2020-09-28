@@ -10,9 +10,10 @@
     "types": "dist/index.d.ts"
   },
   "scripts": {
-    "build": "rollup -c",
+    "build": "backstage-cli plugin:build",
+    "build-rollup": "rollup -c",
     "start": "backstage-cli plugin:serve",
-    "lint": "eslint src/**/*.js dev/**/*.js",
+    "lint": "backstage-cli lint",
     "test": "backstage-cli test",
     "diff": "backstage-cli plugin:diff",
     "prepack": "backstage-cli prepack",
@@ -20,8 +21,11 @@
     "clean": "backstage-cli clean"
   },
   "dependencies": {
-    "@backstage/core": "^0.1.1-alpha.18",
-    "@backstage/theme": "^0.1.1-alpha.18",
+    "@backstage/catalog-model": "^0.1.1-alpha.22",
+    "@backstage/core": "^0.1.1-alpha.22",
+    "@backstage/core-api": "^0.1.1-alpha.22",
+    "@backstage/plugin-catalog": "^0.1.1-alpha.22",
+    "@backstage/theme": "^0.1.1-alpha.22",
     "@material-ui/core": "^4.9.1",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "4.0.0-alpha.45",
@@ -36,8 +40,9 @@
     "react-use": "^15.3.3"
   },
   "devDependencies": {
-    "@backstage/cli": "^0.1.1-alpha.18",
-    "@backstage/dev-utils": "^0.1.1-alpha.18",
+    "@backstage/cli": "^0.1.1-alpha.22",
+    "@backstage/dev-utils": "^0.1.1-alpha.22",
+    "@backstage/test-utils": "^0.1.1-alpha.22",
     "@rollup/plugin-commonjs": "^14.0.0",
     "@rollup/plugin-node-resolve": "^8.4.0",
     "@testing-library/jest-dom": "^5.10.1",

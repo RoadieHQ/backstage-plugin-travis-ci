@@ -3,9 +3,9 @@ import { useCallback, useEffect, useState } from 'react';
 import { useAsyncRetry } from 'react-use';
 import { travisCIApiRef, TravisCIBuildResponse } from '../api/index';
 import { BASE_URL } from '../api/constants';
-import { useSettings } from './useSettings';
+import { useTravisRepoData } from './useTravisRepoData';
 
-type Build = {
+export type Build = {
   id: string;
   buildName: string;
   onRestartClick: () => false | Promise<void>;
@@ -72,8 +72,7 @@ export const transform = (
 };
 
 export function useBuilds() {
-  const [{ repo, owner, token, travisVersion }] = useSettings();
-  const projectName = `${owner}/${repo}`;
+  const repoSlug = useTravisRepoData();
 
   const api = useApi(travisCIApiRef);
   const errorApi = useApi(errorApiRef);
@@ -84,28 +83,23 @@ export function useBuilds() {
 
   const getBuilds = useCallback(
     async ({ limit, offset }: { limit: number; offset: number }) => {
-      if (token === '') {
-        return Promise.reject('No credentials provided');
-      }
-
       try {
-        return await api.getBuilds(
-          { travisVersion, limit, offset },
-          { token, owner, repo },
-        );
+        return await api.getBuilds({
+          limit,
+          offset,
+          repoSlug,
+        });
       } catch (e) {
         errorApi.post(e);
         return Promise.reject(e);
       }
     },
-    [travisVersion, repo, token, owner, api, errorApi],
+    [repoSlug, api, errorApi],
   );
 
   const restartBuild = async (buildId: number) => {
     try {
-      await api.retry(travisVersion, buildId, {
-        token: token,
-      });
+      await api.retry(buildId);
     } catch (e) {
       errorApi.post(e);
     }
@@ -113,14 +107,14 @@ export function useBuilds() {
 
   useEffect(() => {
     getBuilds({ limit: 1, offset: 0 }).then(b => setTotal(b?.[0].build_num!));
-  }, [repo, getBuilds]);
+  }, [repoSlug, getBuilds]);
 
   const { loading, value, retry } = useAsyncRetry(
     () =>
       getBuilds({
         offset: page * pageSize,
         limit: pageSize,
-      }).then(builds => transform(builds ?? [], restartBuild, projectName)),
+      }).then(builds => transform(builds ?? [], restartBuild, repoSlug)),
     [page, pageSize, getBuilds],
   );
 
@@ -130,7 +124,7 @@ export function useBuilds() {
       pageSize,
       loading,
       value,
-      projectName,
+      projectName: repoSlug,
       total,
     },
     {
