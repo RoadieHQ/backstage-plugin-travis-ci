@@ -17,7 +17,7 @@ import { WarningPanel } from '@backstage/core';
  */
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { App } from './components/App';
+import { TravisCIBuildsPage } from './components/TravisCiBuildsPage';
 import { TRAVIS_ANNOTATION } from './hooks/useTravisRepoData';
 
 type Props = { entity: Entity };
@@ -32,6 +32,6 @@ export const Router: React.FC<Props> = ({ entity }) =>
     </WarningPanel>
   ) : (
     <Routes>
-      <Route path="/" element={<App entity={entity} />} />
+      <Route path="/" element={<TravisCIBuildsPage entity={entity} />} />
     </Routes>
   );

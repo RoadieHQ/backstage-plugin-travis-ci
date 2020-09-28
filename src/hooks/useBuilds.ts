@@ -1,4 +1,4 @@
-import { configApiRef, errorApiRef, useApi } from '@backstage/core';
+import { errorApiRef, useApi } from '@backstage/core';
 import { useCallback, useEffect, useState } from 'react';
 import { useAsyncRetry } from 'react-use';
 import { travisCIApiRef, TravisCIBuildResponse } from '../api/index';
@@ -76,7 +76,6 @@ export function useBuilds() {
 
   const api = useApi(travisCIApiRef);
   const errorApi = useApi(errorApiRef);
-  const configApi = useApi(configApiRef);
 
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(0);
@@ -95,7 +94,7 @@ export function useBuilds() {
         return Promise.reject(e);
       }
     },
-    [repoSlug, api, errorApi, configApi],
+    [repoSlug, api, errorApi],
   );
 
   const restartBuild = async (buildId: number) => {

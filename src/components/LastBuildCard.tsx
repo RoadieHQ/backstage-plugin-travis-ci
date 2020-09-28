@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Spotify AB
+ * Copyright 2020 RoadieHQ
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ import {
 import { Table } from '@backstage/core';
 import { Build, useBuilds } from '../hooks/useBuilds';
 import { getStatusComponent } from './BuildsPage/lib/CITable/CITable';
+
 const useStyles = makeStyles<Theme>({
   buildName: {
     display: 'inline-block',

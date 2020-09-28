@@ -3,11 +3,9 @@ import { useCallback } from 'react';
 import { useAsyncRetry } from 'react-use';
 import { travisCIApiRef } from '../api/index';
 import { useAsyncPolling } from './useAsyncPolling';
-import { useTravisRepoData } from './useTravisRepoData';
 
 const INTERVAL_AMOUNT = 1500;
 export function useBuild(buildId: number) {
-  const repoSlug = useTravisRepoData();
   const api = useApi(travisCIApiRef);
   const errorApi = useApi(errorApiRef);
 
@@ -19,7 +17,7 @@ export function useBuild(buildId: number) {
       errorApi.post(e);
       return Promise.reject(e);
     }
-  }, [repoSlug, buildId, api, errorApi]);
+  }, [buildId, api, errorApi]);
 
   const restartBuild = async () => {
     try {
