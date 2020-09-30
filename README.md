@@ -9,22 +9,9 @@
 - List Travis CI Builds
 - Retrigger builds
 
-## How to enable Travis-ci plugin in Backstage
-
-Travis-ci plugin is a built-in part of vanilla backstage project. To start using it for your component, you have to:
-
-1. add annotation to the yaml config file of a component:
-
-```yml
-travis-ci.com/repo-slug: <owner-name>/<project-name>
-```
-
-2. add your developer api key (from https://travis-ci.com/account/preferences) to the environmental variables for your backstage backend server:
-   `TRAVISCI_AUTH_TOKEN="token <your-api-key>"`
-
 ## How to add Travis-ci project dependency to Backstage app
 
-If you have your own version of backstage without this plugin, here it's how to add it:
+If you have your own backstage application without this plugin, here it's how to add it:
 
 1. In the `backstage/packages/app` project add the plugin as a `package.json` dependency:
 
@@ -56,7 +43,7 @@ proxy:
 export { plugin as TravisCI } from '@roadiehq/backstage-plugin-travis-ci';
 ```
 
-4. Add plugin to the ci/cd switcher in the `entitytPage.tsx` source file:
+4. Add plugin to the `entitytPage.tsx` source file:
 
 ```tsx
 // packages/app/src/components/catalog/EntityPage.tsx
@@ -64,6 +51,19 @@ case isTravisCIAvailable(entity):
     content = <RecentTravisCIBuildsWidget entity={entity} />;
     break;
 ```
+
+## How to use Travis-ci plugin in Backstage
+
+Travis-ci plugin is a part of the Backstage sample app. To start using it for your component, you have to:
+
+1. add annotation to the yaml config file of a component:
+
+```yml
+travis-ci.com/repo-slug: <owner-name>/<project-name>
+```
+
+2. add your developer api key to the environmental variables for your backstage backend server (you can copy it from https://travis-ci.com/account/preferences):
+   `TRAVISCI_AUTH_TOKEN="token <your-api-key>"`
 
 ## Develop plugin locally
 
