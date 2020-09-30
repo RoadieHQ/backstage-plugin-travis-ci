@@ -15,7 +15,7 @@ Travis-ci plugin is a built-in part of vanilla backstage project. To start using
 
 1. add annotation to the yaml config file of a component:
 
-```yaml
+```yml
 travis-ci.com/repo-slug: <owner-name>/<project-name>
 ```
 
@@ -32,14 +32,31 @@ If you have your own version of backstage without this plugin, here it's how to 
 yarn add @roadiehq/backstage-plugin-travis-ci
 ```
 
-2. Add plugin to the list of plugins:
+2. add travis-ci to the proxy object in `app-config.yaml` file in the root directory:
+
+```yml
+proxy:
+
+  ...
+
+  '/travisci/api':
+    target: https://api.travis-ci.com
+    changeOrigin: true
+    headers:
+      Authorization:
+        $secret:
+          env: TRAVISCI_AUTH_TOKEN
+      travis-api-version: 3
+```
+
+3. Add plugin to the list of plugins:
 
 ```ts
 // packages/app/src/plugins.ts
 export { plugin as TravisCI } from '@roadiehq/backstage-plugin-travis-ci';
 ```
 
-3. Add plugin to the ci/cd switcher in the `entitytPage.tsx` source file:
+4. Add plugin to the ci/cd switcher in the `entitytPage.tsx` source file:
 
 ```tsx
 // packages/app/src/components/catalog/EntityPage.tsx
