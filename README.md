@@ -67,7 +67,7 @@ travis-ci.com/repo-slug: <owner-name>/<project-name>
 
 ## Develop plugin locally
 
-You can clone the plugin repo into the `packages/` directory:
+You can clone the plugin repo into the `plugins/` directory:
 
 ```sh
 git clone https://github.com/RoadieHQ/backstage-plugin-travis-ci.git travis-ci
