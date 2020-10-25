@@ -1,14 +1,17 @@
-import { configApiRef, createApiFactory, createPlugin } from '@backstage/core';
-import { TravisCIApi, travisCIApiRef } from './api';
+import {
+  createApiFactory,
+  createPlugin,
+  discoveryApiRef,
+} from '@backstage/core';
+import { TravisCIApiClient, travisCIApiRef } from './api';
 
 export const plugin = createPlugin({
   id: 'travisci',
   apis: [
     createApiFactory({
       api: travisCIApiRef,
-      deps: { configApi: configApiRef },
-      factory: ({ configApi }) =>
-        new TravisCIApi(`${configApi.getString('backend.baseUrl')}`),
+      deps: { discoveryApi: discoveryApiRef },
+      factory: ({ discoveryApi }) => new TravisCIApiClient({ discoveryApi }),
     }),
   ],
 });
