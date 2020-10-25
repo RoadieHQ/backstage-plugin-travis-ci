@@ -1,5 +1,4 @@
-import { createApiRef } from '@backstage/core';
-import { API_BASE_URL } from './constants';
+import { createApiRef, DiscoveryApi } from '@backstage/core';
 
 export const travisCIApiRef = createApiRef<TravisCIApi>({
   id: 'plugin.travisci.service',
@@ -76,11 +75,22 @@ type FetchParams = {
   repoSlug: string;
 };
 
-export class TravisCIApi {
+export interface TravisCIApi {
+  retry(buildNumber: number): Promise<Response>;
+  getBuilds(options: {
+    limit: number;
+    offset: number;
+    repoSlug: string;
+  }): Promise<any>;
+  getUser(): any;
+  getBuild(buildId: number): Promise<TravisCIBuildResponse>;
+}
+
+export class TravisCIApiClient implements TravisCIApi {
   baseUrl: string;
 
-  constructor(backendUrl: string = 'http://localhost:7000') {
-    this.baseUrl = backendUrl + API_BASE_URL;
+  constructor(options: { discoveryApi: DiscoveryApi }) {
+    this.baseUrl = options.discoveryApi.getBaseUrl('proxy') + '/travisci/api';
   }
 
   async retry(buildNumber: number) {
