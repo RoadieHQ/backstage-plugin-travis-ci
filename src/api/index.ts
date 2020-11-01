@@ -88,13 +88,15 @@ export interface TravisCIApi {
 
 export class TravisCIApiClient implements TravisCIApi {
   baseUrl: string;
+  discoveryApi: DiscoveryApi;
 
   constructor(options: { discoveryApi: DiscoveryApi }) {
-    this.baseUrl = options.discoveryApi.getBaseUrl('proxy') + '/travisci/api';
+    this.baseUrl = '/travisci/api';
+    this.discoveryApi = options.discoveryApi;
   }
 
   async retry(buildNumber: number) {
-    return fetch(`${this.baseUrl}/build/${buildNumber}/restart`, {
+    return fetch(`${await this.getApiUrl()}/build/${buildNumber}/restart`, {
       method: 'post',
       headers: new Headers({
         'Travis-API-Version': '3',
@@ -104,7 +106,7 @@ export class TravisCIApiClient implements TravisCIApi {
 
   async getBuilds({ limit = 10, offset = 0, repoSlug }: FetchParams) {
     const response = await fetch(
-      `${this.baseUrl}/repo/${encodeURIComponent(
+      `${await this.getApiUrl()}/repo/${encodeURIComponent(
         repoSlug,
       )}/builds?offset=${offset}&limit=${limit}`,
       {
@@ -125,7 +127,7 @@ export class TravisCIApiClient implements TravisCIApi {
 
   async getUser() {
     return await (
-      await fetch(`${this.baseUrl}/user`, {
+      await fetch(`${await this.getApiUrl()}/user`, {
         headers: new Headers({
           'Travis-API-Version': '3',
         }),
@@ -134,12 +136,18 @@ export class TravisCIApiClient implements TravisCIApi {
   }
 
   async getBuild(buildId: number): Promise<TravisCIBuildResponse> {
-    const response = await fetch(`${this.baseUrl}/build/${buildId}`, {
+    const response = await fetch(`${await this.getApiUrl()}/build/${buildId}`, {
       headers: new Headers({
         'Travis-API-Version': '3',
       }),
     });
 
     return response.json();
+  }
+
+  private async getApiUrl() {
+    const proxyUrl = await this.discoveryApi.getBaseUrl('proxy');
+    console.log(proxyUrl);
+    return proxyUrl + this.baseUrl;
   }
 }
