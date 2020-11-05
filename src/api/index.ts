@@ -147,7 +147,6 @@ export class TravisCIApiClient implements TravisCIApi {
 
   private async getApiUrl() {
     const proxyUrl = await this.discoveryApi.getBaseUrl('proxy');
-    console.log(proxyUrl);
     return proxyUrl + this.baseUrl;
   }
 }
