@@ -9233,9 +9233,9 @@ microevent.ts@~0.1.1:
   integrity sha512-jo1OfR4TaEwd5HOrt5+tAZ9mqT4jmpNAusXtyfNzqVm9uiSYFZlKM1wYL4oU7azZW/PxQW53wM0S6OR1JHNa2g==
 
 micromark-extension-gfm-autolink-literal@~0.5.0:
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/micromark-extension-gfm-autolink-literal/-/micromark-extension-gfm-autolink-literal-0.5.2.tgz#ca5278ef661ca6ddc01b8aeee3f6c20d4fd1da76"
-  integrity sha512-1XjEGCUJCcmPGsG3QcOI2UkppkkN6IOO15PLEe3ZHB9bSOWEGmvrbGBw7jNxC1/KZb+wRHHEbIwJoTFfHOeAMQ==
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/micromark-extension-gfm-autolink-literal/-/micromark-extension-gfm-autolink-literal-0.5.4.tgz#0c8cc7004dd2277ed8f52e01195432291c47e699"
+  integrity sha512-471VKd4k3SiX7vx9fC+IYeGQL0RnxwBBXeEc5WConb7naJDG5m16guA+VoFzyXchrvmU08t0dUWWPZ0mkJSXVw==
   dependencies:
     micromark "~2.11.0"
 
