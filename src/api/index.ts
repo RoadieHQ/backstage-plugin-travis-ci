@@ -1,4 +1,5 @@
 import { createApiRef, DiscoveryApi } from '@backstage/core';
+import fetch from 'cross-fetch';
 
 export const travisCIApiRef = createApiRef<TravisCIApi>({
   id: 'plugin.travisci.service',
@@ -56,7 +57,7 @@ export type TravisCIBuildResponse = {
       '@href': string;
       '@representation': string;
       id: number;
-    },
+    }
   ];
   stages: any[];
   created_by: {
@@ -107,18 +108,18 @@ export class TravisCIApiClient implements TravisCIApi {
   async getBuilds({ limit = 10, offset = 0, repoSlug }: FetchParams) {
     const response = await fetch(
       `${await this.getApiUrl()}/repo/${encodeURIComponent(
-        repoSlug,
+        repoSlug
       )}/builds?offset=${offset}&limit=${limit}`,
       {
         headers: new Headers({
           'Travis-API-Version': '3',
         }),
-      },
+      }
     );
 
     if (!response.ok) {
       throw new Error(
-        `error while fetching travis builds: ${response.status}: ${response.statusText}`,
+        `error while fetching travis builds: ${response.status}: ${response.statusText}`
       );
     }
 
