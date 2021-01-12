@@ -68,9 +68,15 @@ describe('LastBuildCard', () => {
       </ThemeProvider>
     );
     expect(
-      await rendered.findByText('Create catalog-info-5.yaml')
+      await rendered.findByText(buildsResponseMock.builds[2].commit.message)
     ).toBeInTheDocument();
-    expect((await rendered.findAllByText('passed'))[0]).toBeInTheDocument();
-    expect((await rendered.findAllByText('master'))[0]).toBeInTheDocument();
+    expect(
+      (await rendered.findAllByText(buildsResponseMock.builds[2].state))[0]
+    ).toBeInTheDocument();
+    expect(
+      (
+        await rendered.findAllByText(buildsResponseMock.builds[2].branch.name)
+      )[0]
+    ).toBeInTheDocument();
   });
 });
