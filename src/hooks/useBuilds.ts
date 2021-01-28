@@ -77,8 +77,12 @@ export function useBuilds() {
   const api = useApi(travisCIApiRef);
   const errorApi = useApi(errorApiRef);
   const configApi = useApi(configApiRef);
-  const baseUrl =
-    configApi.getString('travisci.baseUrl') || 'https://travis-ci.com/';
+  let baseUrl: string;
+  try {
+    baseUrl = configApi.getString('travisci.baseUrl');
+  } catch (e) {
+    baseUrl = 'https://travis-ci.com/';
+  }
 
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(0);
