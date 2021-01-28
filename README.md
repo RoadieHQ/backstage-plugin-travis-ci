@@ -19,8 +19,9 @@ If you have your own backstage application without this plugin, here it's how to
 yarn add @roadiehq/backstage-plugin-travis-ci
 ```
 
-2. add travis-ci to the proxy object in `app-config.yaml` file in the root directory:
+2. add configuration in `app-config.yaml` file in the root directory:
 
+In the the proxy object: 
 ```yml
 proxy:
 
@@ -34,6 +35,12 @@ proxy:
         $secret:
           env: TRAVISCI_AUTH_TOKEN
       travis-api-version: 3
+```
+
+as a separate object:
+```yml
+travisci:
+  baseUrl: 'https://travis-ci.com/'
 ```
 
 3. Add plugin to the list of plugins:

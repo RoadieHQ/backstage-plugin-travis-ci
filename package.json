@@ -57,5 +57,21 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "configSchema": {
+    "$schema": "https://backstage.io/schema/config-v1",
+    "title": "@backstage/sentry",
+    "type": "object",
+    "properties": {
+      "travisci": {
+        "type": "object",
+        "properties": {
+          "baseUrl": {
+            "type": "string",
+            "visibility": "frontend"
+          }
+        }
+      }
+    }
+  }
 }
