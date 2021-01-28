@@ -1,8 +1,7 @@
-import { errorApiRef, useApi } from '@backstage/core';
+import { configApiRef, errorApiRef, useApi } from '@backstage/core';
 import { useCallback, useEffect, useState } from 'react';
 import { useAsyncRetry } from 'react-use';
 import { travisCIApiRef, TravisCIBuildResponse } from '../api/index';
-import { BASE_URL } from '../api/constants';
 import { useTravisRepoData } from './useTravisRepoData';
 
 export type Build = {
@@ -47,6 +46,7 @@ export const transform = (
   buildsData: TravisCIBuildResponse[],
   restartBuild: { (buildId: number): Promise<void> },
   projectName: string,
+  baseUrl: string,
 ): Build[] => {
   return buildsData.map(buildData => {
     const tableBuildInfo = {
@@ -64,7 +64,7 @@ export const transform = (
       finishedAt: buildData.finished_at,
       duration: buildData.duration,
       status: makeReadableStatus(buildData.state),
-      buildUrl: `${BASE_URL}${projectName}${buildData['@href']}`,
+      buildUrl: `${baseUrl}${projectName}${buildData['@href']}`,
     };
 
     return tableBuildInfo;
@@ -76,6 +76,9 @@ export function useBuilds() {
 
   const api = useApi(travisCIApiRef);
   const errorApi = useApi(errorApiRef);
+  const configApi = useApi(configApiRef);
+  const baseUrl =
+    configApi.getString('travisci.baseUrl') || 'https://travis-ci.com/';
 
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(0);
@@ -114,7 +117,9 @@ export function useBuilds() {
       getBuilds({
         offset: page * pageSize,
         limit: pageSize,
-      }).then(builds => transform(builds ?? [], restartBuild, repoSlug)),
+      }).then(builds =>
+        transform(builds ?? [], restartBuild, repoSlug, baseUrl),
+      ),
     [page, pageSize, getBuilds],
   );
 
