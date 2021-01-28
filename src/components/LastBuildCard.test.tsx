@@ -21,6 +21,7 @@ import {
   ApiProvider,
   UrlPatternDiscovery,
   errorApiRef,
+  configApiRef,
 } from '@backstage/core';
 import { rest } from 'msw';
 import { msw } from '@backstage/test-utils';
@@ -35,7 +36,12 @@ import { MemoryRouter } from 'react-router-dom';
 const discoveryApi = UrlPatternDiscovery.compile('http://exampleapi.com');
 const errorApiMock = { post: jest.fn(), error$: jest.fn() };
 
+const config = {
+  getString: (_: string) => undefined,
+};
+
 const apis = ApiRegistry.from([
+  [configApiRef, config],
   [errorApiRef, errorApiMock],
   [travisCIApiRef, new TravisCIApiClient({ discoveryApi })],
 ]);
@@ -48,12 +54,12 @@ describe('LastBuildCard', () => {
     worker.use(
       rest.get(
         'http://exampleapi.com/travisci/api/repo/RoadieHQ%2Fsample-service/builds?offset=0&limit=1',
-        (_, res, ctx) => res(ctx.json(buildsResponseMock))
+        (_, res, ctx) => res(ctx.json(buildsResponseMock)),
       ),
       rest.get(
         'http://exampleapi.com/travisci/api/repo/RoadieHQ%2Fsample-service/builds?offset=0&limit=5',
-        (_, res, ctx) => res(ctx.json(buildsResponseMock))
-      )
+        (_, res, ctx) => res(ctx.json(buildsResponseMock)),
+      ),
     );
   });
 
@@ -65,18 +71,18 @@ describe('LastBuildCard', () => {
             <RecentTravisCIBuildsWidget entity={entityMock} />
           </ApiProvider>
         </MemoryRouter>
-      </ThemeProvider>
+      </ThemeProvider>,
     );
     expect(
-      await rendered.findByText(buildsResponseMock.builds[2].commit.message)
+      await rendered.findByText(buildsResponseMock.builds[2].commit.message),
     ).toBeInTheDocument();
     expect(
-      (await rendered.findAllByText(buildsResponseMock.builds[2].state))[0]
+      (await rendered.findAllByText(buildsResponseMock.builds[2].state))[0],
     ).toBeInTheDocument();
     expect(
       (
         await rendered.findAllByText(buildsResponseMock.builds[2].branch.name)
-      )[0]
+      )[0],
     ).toBeInTheDocument();
   });
 });

@@ -56,22 +56,8 @@
     "rollup-plugin-peer-deps-external": "^2.2.3"
   },
   "files": [
-    "dist"
+    "dist",
+    "config.d.ts"
   ],
-  "configSchema": {
-    "$schema": "https://backstage.io/schema/config-v1",
-    "title": "@backstage/sentry",
-    "type": "object",
-    "properties": {
-      "travisci": {
-        "type": "object",
-        "properties": {
-          "baseUrl": {
-            "type": "string",
-            "visibility": "frontend"
-          }
-        }
-      }
-    }
-  }
+  "configSchema": "config.d.ts"
 }
