@@ -26,14 +26,14 @@ export const travisciPlugin = createPlugin({
   },
 });
 
-export const EntityArgoCDContent = travisciPlugin.provide(
+export const EntityTravisCIContent = travisciPlugin.provide(
   createRoutableExtension({
     component: () => import('./Router').then(m => m.Router),
     mountPoint: entityContentRouteRef,
   }),
 );
 
-export const EntityArgoCDOverviewCard = travisciPlugin.provide(
+export const EntityTravisCIOverviewCard = travisciPlugin.provide(
   createComponentExtension({
     component: {
       lazy: () =>
