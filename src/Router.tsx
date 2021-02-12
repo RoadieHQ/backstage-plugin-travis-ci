@@ -20,13 +20,11 @@ import { TravisCIBuildsPage } from './components/TravisCiBuildsPage';
 import { TRAVIS_ANNOTATION } from './hooks/useTravisRepoData';
 import { MissingAnnotationEmptyState } from '@backstage/core';
 
-type Props = { entity: Entity };
-
-export const isPluginApplicableToEntity = (entity: Entity) =>
+export const isTravisciAvailable = (entity: Entity) =>
   Boolean(entity?.metadata.annotations?.[TRAVIS_ANNOTATION]);
 
-export const Router: React.FC<Props> = ({ entity }) =>
-  !isPluginApplicableToEntity(entity) ? (
+export const Router = ({ entity }: { entity: Entity }) =>
+  !isTravisciAvailable(entity) ? (
     <MissingAnnotationEmptyState annotation={TRAVIS_ANNOTATION} />
   ) : (
     <Routes>
