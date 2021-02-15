@@ -19,6 +19,7 @@ import { render } from '@testing-library/react';
 import {
   ApiRegistry,
   ApiProvider,
+  IdentityApi,
   UrlPatternDiscovery,
   errorApiRef,
   configApiRef,
@@ -35,6 +36,20 @@ import { MemoryRouter } from 'react-router-dom';
 
 const discoveryApi = UrlPatternDiscovery.compile('http://exampleapi.com');
 const errorApiMock = { post: jest.fn(), error$: jest.fn() };
+const identityApi: IdentityApi = {
+  getUserId() {
+    return 'jane-fonda';
+  },
+  getProfile() {
+    return { email: 'jane-fonda@spotify.com' };
+  },
+  async getIdToken() {
+    return Promise.resolve('fake-id-token');
+  },
+  async signOut() {
+    return Promise.resolve();
+  },
+};
 
 const config = {
   getString: (_: string) => undefined,
@@ -43,7 +58,7 @@ const config = {
 const apis = ApiRegistry.from([
   [configApiRef, config],
   [errorApiRef, errorApiMock],
-  [travisCIApiRef, new TravisCIApiClient({ discoveryApi })],
+  [travisCIApiRef, new TravisCIApiClient({ discoveryApi, identityApi })],
 ]);
 describe('LastBuildCard', () => {
   const worker = setupServer();
