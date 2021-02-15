@@ -1,4 +1,4 @@
-import { createApiRef, DiscoveryApi } from '@backstage/core';
+import { createApiRef, DiscoveryApi, IdentityApi } from '@backstage/core';
 import fetch from 'cross-fetch';
 
 export const travisCIApiRef = createApiRef<TravisCIApi>({
@@ -90,22 +90,27 @@ export interface TravisCIApi {
 export class TravisCIApiClient implements TravisCIApi {
   baseUrl: string;
   discoveryApi: DiscoveryApi;
+  identityApi: IdentityApi;
 
-  constructor(options: { discoveryApi: DiscoveryApi }) {
+  constructor(options: { discoveryApi: DiscoveryApi, identityApi: IdentityApi }) {
     this.baseUrl = '/travisci/api';
     this.discoveryApi = options.discoveryApi;
+    this.identityApi = options.identityApi;
   }
 
   async retry(buildNumber: number) {
+    const idToken = await this.identityApi.getIdToken();
     return fetch(`${await this.getApiUrl()}/build/${buildNumber}/restart`, {
       method: 'post',
       headers: new Headers({
         'Travis-API-Version': '3',
+        ...(idToken && { Authorization: `Bearer ${idToken}` }),
       }),
     });
   }
 
   async getBuilds({ limit = 10, offset = 0, repoSlug }: FetchParams) {
+    const idToken = await this.identityApi.getIdToken();
     const response = await fetch(
       `${await this.getApiUrl()}/repo/${encodeURIComponent(
         repoSlug
@@ -113,6 +118,7 @@ export class TravisCIApiClient implements TravisCIApi {
       {
         headers: new Headers({
           'Travis-API-Version': '3',
+          ...(idToken && { Authorization: `Bearer ${idToken}` }),
         }),
       }
     );
@@ -127,19 +133,23 @@ export class TravisCIApiClient implements TravisCIApi {
   }
 
   async getUser() {
+    const idToken = await this.identityApi.getIdToken();
     return await (
       await fetch(`${await this.getApiUrl()}/user`, {
         headers: new Headers({
           'Travis-API-Version': '3',
+          ...(idToken && { Authorization: `Bearer ${idToken}` }),
         }),
       })
     ).json();
   }
 
   async getBuild(buildId: number): Promise<TravisCIBuildResponse> {
+    const idToken = await this.identityApi.getIdToken();
     const response = await fetch(`${await this.getApiUrl()}/build/${buildId}`, {
       headers: new Headers({
         'Travis-API-Version': '3',
+        ...(idToken && { Authorization: `Bearer ${idToken}` }),
       }),
     });
 
