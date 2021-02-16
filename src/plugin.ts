@@ -5,6 +5,7 @@ import {
   createRoutableExtension,
   createRouteRef,
   discoveryApiRef,
+  identityApiRef,
 } from '@backstage/core';
 import { TravisCIApiClient, travisCIApiRef } from './api';
 
@@ -17,8 +18,8 @@ export const travisciPlugin = createPlugin({
   apis: [
     createApiFactory({
       api: travisCIApiRef,
-      deps: { discoveryApi: discoveryApiRef },
-      factory: ({ discoveryApi }) => new TravisCIApiClient({ discoveryApi }),
+      deps: { discoveryApi: discoveryApiRef, identityApi: identityApiRef },
+      factory: ({ discoveryApi, identityApi }) => new TravisCIApiClient({ discoveryApi, identityApi }),
     }),
   ],
   routes: {
