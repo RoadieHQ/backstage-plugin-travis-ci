@@ -18,14 +18,14 @@ import { travisCIApiRef } from '../api';
 import { useLocalStorage } from 'react-use';
 import { Entity } from '@backstage/catalog-model';
 
+export type Settings = {
+  entity: Entity;
+};
+
 export const StateContext = React.createContext<
   [Settings, React.Dispatch<Settings>]
 >([] as any);
 const STORAGE_KEY = `${travisCIApiRef.id}.settings`;
-
-export type Settings = {
-  entity: Entity;
-};
 
 type Props = { entity: Entity };
 export const ContextProvider: React.FC<Props> = ({ entity, children }) => {

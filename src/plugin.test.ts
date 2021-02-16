@@ -1,7 +1,7 @@
-import { plugin } from './plugin';
+import { travisciPlugin } from './plugin';
 
 describe('travis-ci', () => {
   it('should export plugin', () => {
-    expect(plugin).toBeDefined();
+    expect(travisciPlugin).toBeDefined();
   });
 });

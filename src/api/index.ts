@@ -1,11 +1,6 @@
 import { createApiRef, DiscoveryApi, IdentityApi } from '@backstage/core';
 import fetch from 'cross-fetch';
 
-export const travisCIApiRef = createApiRef<TravisCIApi>({
-  id: 'plugin.travisci.service',
-  description: 'Used by the TravisCI plugin to make requests',
-});
-
 export type TravisCIBuildResponse = {
   '@type': string;
   '@href': string;
@@ -75,7 +70,6 @@ type FetchParams = {
   offset: number;
   repoSlug: string;
 };
-
 export interface TravisCIApi {
   retry(buildNumber: number): Promise<Response>;
   getBuilds(options: {
@@ -86,6 +80,11 @@ export interface TravisCIApi {
   getUser(): any;
   getBuild(buildId: number): Promise<TravisCIBuildResponse>;
 }
+
+export const travisCIApiRef = createApiRef<TravisCIApi>({
+  id: 'plugin.travisci.service',
+  description: 'Used by the TravisCI plugin to make requests',
+});
 
 export class TravisCIApiClient implements TravisCIApi {
   baseUrl: string;
