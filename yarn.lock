@@ -1052,6 +1052,30 @@
   dependencies:
     lodash "^4.17.15"
 
+"@backstage/config@^0.1.3":
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/@backstage/config/-/config-0.1.3.tgz#e9d182cbbedbf49f362e004ae10da35180a0c252"
+  integrity sha512-kniSfPEM6FrT1qYqdslxfuFyGfJq0EeQQg3eUjUoF5GsIYMXnoss5vimmrkxuRbH0bdMLTPle9+JsjfDQr0Y9Q==
+  dependencies:
+    lodash "^4.17.15"
+
+"@backstage/core-api@^0.2.11":
+  version "0.2.13"
+  resolved "https://registry.yarnpkg.com/@backstage/core-api/-/core-api-0.2.13.tgz#b5dc52da2fdac310c0dafd5bc922eb4129e1a631"
+  integrity sha512-UHmhOMoPNh5pwOqVSEevYzh8Lpb6g2eQRdf5MLcXa+etlhbZcsvhsbgTZOBZBzLUS60rmuZqMv0V4w3scNGUMg==
+  dependencies:
+    "@backstage/config" "^0.1.3"
+    "@backstage/theme" "^0.2.4"
+    "@material-ui/core" "^4.11.0"
+    "@material-ui/icons" "^4.9.1"
+    "@types/prop-types" "^15.7.3"
+    "@types/react" "^16.9"
+    prop-types "^15.7.2"
+    react "^16.12.0"
+    react-router-dom "6.0.0-beta.0"
+    react-use "^15.3.3"
+    zen-observable "^0.8.15"
+
 "@backstage/core-api@^0.2.7", "@backstage/core-api@^0.2.8":
   version "0.2.9"
   resolved "https://registry.npmjs.org/@backstage/core-api/-/core-api-0.2.9.tgz#c6955eeb5e26f66b5def0f93f2c148c5cad6ccdd"
@@ -1069,7 +1093,7 @@
     react-use "^15.3.3"
     zen-observable "^0.8.15"
 
-"@backstage/core@^0.6.0", "@backstage/core@^0.6.1":
+"@backstage/core@^0.6.1":
   version "0.6.1"
   resolved "https://registry.npmjs.org/@backstage/core/-/core-0.6.1.tgz#f846d4b4eb00a0db27e2bd69b963deae8279f4bb"
   integrity sha512-+Twa5or1w3l/TcwMPrAEyinE9E8bFndNeRNCWCidMnRVzL7l1iW/kQMfFdPXLHQgQtA44AR8/zVnqxBLk6SkbQ==
@@ -1106,6 +1130,49 @@
     react-router-dom "6.0.0-beta.0"
     react-sparklines "^1.7.0"
     react-syntax-highlighter "^13.5.1"
+    react-use "^15.3.3"
+    remark-gfm "^1.0.0"
+    zen-observable "^0.8.15"
+
+"@backstage/core@^0.6.2":
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/@backstage/core/-/core-0.6.3.tgz#574ca46ab59e18af07fcf3a248c4428d4dfcc302"
+  integrity sha512-OSpnvotyCkb6fL02T1Z5TLcogRlOzVIH8YBfNlKeo/Xo/JnlVp1uSpQxCWjAW/lzGK5gp6oh3ezFRjm69mTwSA==
+  dependencies:
+    "@backstage/config" "^0.1.3"
+    "@backstage/core-api" "^0.2.11"
+    "@backstage/theme" "^0.2.3"
+    "@material-ui/core" "^4.11.0"
+    "@material-ui/icons" "^4.9.1"
+    "@material-ui/lab" "4.0.0-alpha.45"
+    "@testing-library/react-hooks" "^3.4.2"
+    "@types/dagre" "^0.7.44"
+    "@types/prop-types" "^15.7.3"
+    "@types/react" "^16.9"
+    "@types/react-sparklines" "^1.7.0"
+    "@types/react-text-truncate" "^0.14.0"
+    classnames "^2.2.6"
+    clsx "^1.1.0"
+    d3-selection "^2.0.0"
+    d3-shape "^2.0.0"
+    d3-zoom "^2.0.0"
+    dagre "^0.8.5"
+    immer "^8.0.1"
+    lodash "^4.17.15"
+    material-table "^1.69.1"
+    prop-types "^15.7.2"
+    qs "^6.9.4"
+    rc-progress "^3.0.0"
+    react "^16.12.0"
+    react-dom "^16.12.0"
+    react-helmet "6.1.0"
+    react-hook-form "^6.6.0"
+    react-markdown "^5.0.2"
+    react-router "6.0.0-beta.0"
+    react-router-dom "6.0.0-beta.0"
+    react-sparklines "^1.7.0"
+    react-syntax-highlighter "^13.5.1"
+    react-text-truncate "^0.16.0"
     react-use "^15.3.3"
     remark-gfm "^1.0.0"
     zen-observable "^0.8.15"
@@ -1232,6 +1299,13 @@
   version "0.2.3"
   resolved "https://registry.npmjs.org/@backstage/theme/-/theme-0.2.3.tgz#434e7fbc1645221c79e414d3a1be9be8c69e1f1c"
   integrity sha512-afoozMl4BWpjj/pmp9jWvGgrmgFVhw9FlVGK71FWTCPTqBO46WCDPopdX3Ui9ZYFNDaNxN6vvmyNN4HUWzO/Ow==
+  dependencies:
+    "@material-ui/core" "^4.11.0"
+
+"@backstage/theme@^0.2.4":
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/@backstage/theme/-/theme-0.2.4.tgz#dfe7215ee899bc46b67524289b340ecf35db726c"
+  integrity sha512-Zi7jO6JIZvI2lb/CX4G+CXK5lVME83gxeKFxaEukQMMKxwDK2Yh7ep35EkXvLOJbChGxB+B5QelcV4g+YeYPgw==
   dependencies:
     "@material-ui/core" "^4.11.0"
 
@@ -1756,18 +1830,6 @@
   dependencies:
     "@rollup/pluginutils" "^3.0.8"
 
-"@rollup/plugin-node-resolve@^11.2.0":
-  version "11.2.0"
-  resolved "https://registry.npmjs.org/@rollup/plugin-node-resolve/-/plugin-node-resolve-11.2.0.tgz#a5ab88c35bb7622d115f44984dee305112b6f714"
-  integrity sha512-qHjNIKYt5pCcn+5RUBQxK8krhRvf1HnyVgUCcFFcweDS7fhkOLZeYh0mhHK6Ery8/bb9tvN/ubPzmfF0qjDCTA==
-  dependencies:
-    "@rollup/pluginutils" "^3.1.0"
-    "@types/resolve" "1.17.1"
-    builtin-modules "^3.1.0"
-    deepmerge "^4.2.2"
-    is-module "^1.0.0"
-    resolve "^1.19.0"
-
 "@rollup/plugin-node-resolve@^9.0.0":
   version "9.0.0"
   resolved "https://registry.npmjs.org/@rollup/plugin-node-resolve/-/plugin-node-resolve-9.0.0.tgz#39bd0034ce9126b39c1699695f440b4b7d2b62e6"
@@ -2224,6 +2286,13 @@
   version "17.0.1"
   resolved "https://registry.npmjs.org/@types/react-test-renderer/-/react-test-renderer-17.0.1.tgz#3120f7d1c157fba9df0118dae20cb0297ee0e06b"
   integrity sha512-3Fi2O6Zzq/f3QR9dRnlnHso9bMl7weKCviFmfF6B4LS1Uat6Hkm15k0ZAQuDz+UBq6B3+g+NM6IT2nr5QgPzCw==
+  dependencies:
+    "@types/react" "*"
+
+"@types/react-text-truncate@^0.14.0":
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/@types/react-text-truncate/-/react-text-truncate-0.14.0.tgz#588bbabbc7f2a13815e805f3a48942db73fe65fe"
+  integrity sha512-XZNmx8mMPFjRLFjFqIF5uLPXEZ4THKxoEv1yU63JzInV3ES42PD+DaQOK6+Rd+cRolzrNoY4YIY9rrW8kh4ikw==
   dependencies:
     "@types/react" "*"
 
@@ -10150,7 +10219,7 @@ prop-types@15.6.2:
     loose-envify "^1.3.1"
     object-assign "^4.1.1"
 
-prop-types@^15.5.10, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.10, prop-types@^15.5.7, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -10578,6 +10647,13 @@ react-syntax-highlighter@^13.5.1:
     prismjs "^1.21.0"
     refractor "^3.1.0"
 
+react-text-truncate@^0.16.0:
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/react-text-truncate/-/react-text-truncate-0.16.0.tgz#03bbb942437dfba5cc0faf614f1339f888926f80"
+  integrity sha512-hMFXhUHgIBCCDaOfOsZAFeO4DGfG/paLyaS/F+X11CXseuScpxmMBUW6Luwjk9/FlGrVJWNGy1FSfK6b4yyiIg==
+  dependencies:
+    prop-types "^15.5.7"
+
 react-transition-group@^4.0.0, react-transition-group@^4.4.0:
   version "4.4.1"
   resolved "https://registry.npmjs.org/react-transition-group/-/react-transition-group-4.4.1.tgz#63868f9325a38ea5ee9535d828327f85773345c9"
@@ -10972,7 +11048,7 @@ resolve@1.17.0:
   dependencies:
     path-parse "^1.0.6"
 
-resolve@^1.10.0, resolve@^1.13.1, resolve@^1.16.1, resolve@^1.17.0, resolve@^1.18.1, resolve@^1.19.0:
+resolve@^1.10.0, resolve@^1.13.1, resolve@^1.16.1, resolve@^1.17.0, resolve@^1.18.1:
   version "1.20.0"
   resolved "https://registry.npmjs.org/resolve/-/resolve-1.20.0.tgz#629a013fb3f70755d6f0b7935cc1c2c5378b1975"
   integrity sha512-wENBPt4ySzg4ybFQW2TT1zMQucPK95HSh/nq2CFTZVOGut2+pQvSsgtda4d26YrYcr067wjbmzOG8byDPBX63A==
@@ -11054,16 +11130,7 @@ rollup-plugin-dts@1.4.13:
   optionalDependencies:
     "@babel/code-frame" "^7.10.4"
 
-rollup-plugin-dts@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.npmjs.org/rollup-plugin-dts/-/rollup-plugin-dts-2.0.1.tgz#333f50a637e199a073d490b198746f3c6bd07701"
-  integrity sha512-y38NSXIY37YExCumbGBTL5dXg7pL7XD+Kbe98iEHWFN9yiKJf7t4kKBOkml5ylUDjQIXBnNClGDeRktc1T5dmA==
-  dependencies:
-    magic-string "^0.25.7"
-  optionalDependencies:
-    "@babel/code-frame" "^7.10.4"
-
-rollup-plugin-esbuild@2.6.x, rollup-plugin-esbuild@^2.4.2:
+rollup-plugin-esbuild@2.6.x:
   version "2.6.1"
   resolved "https://registry.npmjs.org/rollup-plugin-esbuild/-/rollup-plugin-esbuild-2.6.1.tgz#5785532940d49adf1bff5b38e9bd9089262d4e7a"
   integrity sha512-hskMEQQ4Vxlyoeg1OWlFTwWHIhpNaw6q+diOT7p9pdkk34m9Mbk3aymS/JbTqLXy/AbJi22iuXrucknKpeczfg==
@@ -11072,7 +11139,7 @@ rollup-plugin-esbuild@2.6.x, rollup-plugin-esbuild@^2.4.2:
     joycon "^2.2.5"
     strip-json-comments "^3.1.1"
 
-rollup-plugin-peer-deps-external@^2.2.2, rollup-plugin-peer-deps-external@^2.2.3:
+rollup-plugin-peer-deps-external@^2.2.2:
   version "2.2.4"
   resolved "https://registry.npmjs.org/rollup-plugin-peer-deps-external/-/rollup-plugin-peer-deps-external-2.2.4.tgz#8a420bbfd6dccc30aeb68c9bf57011f2f109570d"
   integrity sha512-AWdukIM1+k5JDdAqV/Cxd+nejvno2FVLVeZ74NKggm3Q5s9cbbcOgUPGdbxPi4BXu7xGaZ8HG12F+thImYu/0g==
@@ -11121,13 +11188,6 @@ rollup@2.33.x:
   integrity sha512-RpayhPTe4Gu/uFGCmk7Gp5Z9Qic2VsqZ040G+KZZvsZYdcuWaJg678JeDJJvJeEQXminu24a2au+y92CUWVd+w==
   optionalDependencies:
     fsevents "~2.1.2"
-
-rollup@^2.33.1:
-  version "2.39.0"
-  resolved "https://registry.npmjs.org/rollup/-/rollup-2.39.0.tgz#be4f98c9e421793a8fec82c854fb567c35e22ab6"
-  integrity sha512-+WR3bttcq7zE+BntH09UxaW3bQo3vItuYeLsyk4dL2tuwbeSKJuvwiawyhEnvRdRgrII0Uzk00FpctHO/zB1kw==
-  optionalDependencies:
-    fsevents "~2.3.1"
 
 rsvp@^4.8.4:
   version "4.8.5"
