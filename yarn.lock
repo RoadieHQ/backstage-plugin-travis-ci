@@ -922,12 +922,26 @@
     "@backstage/config" "^0.1.2"
     cross-fetch "^3.0.6"
 
-"@backstage/catalog-model@^0.7.0", "@backstage/catalog-model@^0.7.1":
+"@backstage/catalog-model@^0.7.1":
   version "0.7.1"
   resolved "https://registry.npmjs.org/@backstage/catalog-model/-/catalog-model-0.7.1.tgz#56089c9e027322241f621398e71c33153f2a83c8"
   integrity sha512-S3hU1RuUqBVy+Xhrr+XIybBLYaXGJTEbOG25GjePCpEujclZlMl8ZWzzsVFluZ8+ydeYERPXweuDi2l7feOHBw==
   dependencies:
     "@backstage/config" "^0.1.2"
+    "@types/json-schema" "^7.0.5"
+    "@types/yup" "^0.29.8"
+    ajv "^7.0.3"
+    json-schema "^0.2.5"
+    lodash "^4.17.15"
+    uuid "^8.0.0"
+    yup "^0.29.3"
+
+"@backstage/catalog-model@^0.7.2":
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/@backstage/catalog-model/-/catalog-model-0.7.4.tgz#e3cd532ef9e3f27725816985baf2937c7e1a4bcd"
+  integrity sha512-KnQidJLJIBWRqYAkbFASLI5JxXi3FLMUWvxtUnN9HbAEzLFYbBqsKz+AIN38vTJoVryaWTKtMI10/vCMLRP7uA==
+  dependencies:
+    "@backstage/config" "^0.1.3"
     "@types/json-schema" "^7.0.5"
     "@types/yup" "^0.29.8"
     ajv "^7.0.3"
@@ -1049,6 +1063,13 @@
   version "0.1.2"
   resolved "https://registry.npmjs.org/@backstage/config/-/config-0.1.2.tgz#bf29595e4566562a0c28e371d6c504f0ec9d5a87"
   integrity sha512-JI92C2YbchNzByowdDzZlULh1hwP1Q0ax6DqbwBPJ2BrOrM+9fCJxFQx4xVm2b+OILpIZZKX77GxO0PbamxnZg==
+  dependencies:
+    lodash "^4.17.15"
+
+"@backstage/config@^0.1.3":
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/@backstage/config/-/config-0.1.3.tgz#e9d182cbbedbf49f362e004ae10da35180a0c252"
+  integrity sha512-kniSfPEM6FrT1qYqdslxfuFyGfJq0EeQQg3eUjUoF5GsIYMXnoss5vimmrkxuRbH0bdMLTPle9+JsjfDQr0Y9Q==
   dependencies:
     lodash "^4.17.15"
 
@@ -1755,18 +1776,6 @@
   integrity sha512-yfLbTdNS6amI/2OpmbiBoW12vngr5NW2jCJVZSBEz+H5KfUJZ2M7sDjk0U6GOOdCWFVScShte29o9NezJ53TPw==
   dependencies:
     "@rollup/pluginutils" "^3.0.8"
-
-"@rollup/plugin-node-resolve@^11.2.0":
-  version "11.2.0"
-  resolved "https://registry.npmjs.org/@rollup/plugin-node-resolve/-/plugin-node-resolve-11.2.0.tgz#a5ab88c35bb7622d115f44984dee305112b6f714"
-  integrity sha512-qHjNIKYt5pCcn+5RUBQxK8krhRvf1HnyVgUCcFFcweDS7fhkOLZeYh0mhHK6Ery8/bb9tvN/ubPzmfF0qjDCTA==
-  dependencies:
-    "@rollup/pluginutils" "^3.1.0"
-    "@types/resolve" "1.17.1"
-    builtin-modules "^3.1.0"
-    deepmerge "^4.2.2"
-    is-module "^1.0.0"
-    resolve "^1.19.0"
 
 "@rollup/plugin-node-resolve@^9.0.0":
   version "9.0.0"
@@ -10972,7 +10981,7 @@ resolve@1.17.0:
   dependencies:
     path-parse "^1.0.6"
 
-resolve@^1.10.0, resolve@^1.13.1, resolve@^1.16.1, resolve@^1.17.0, resolve@^1.18.1, resolve@^1.19.0:
+resolve@^1.10.0, resolve@^1.13.1, resolve@^1.16.1, resolve@^1.17.0, resolve@^1.18.1:
   version "1.20.0"
   resolved "https://registry.npmjs.org/resolve/-/resolve-1.20.0.tgz#629a013fb3f70755d6f0b7935cc1c2c5378b1975"
   integrity sha512-wENBPt4ySzg4ybFQW2TT1zMQucPK95HSh/nq2CFTZVOGut2+pQvSsgtda4d26YrYcr067wjbmzOG8byDPBX63A==
@@ -11054,16 +11063,7 @@ rollup-plugin-dts@1.4.13:
   optionalDependencies:
     "@babel/code-frame" "^7.10.4"
 
-rollup-plugin-dts@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.npmjs.org/rollup-plugin-dts/-/rollup-plugin-dts-2.0.1.tgz#333f50a637e199a073d490b198746f3c6bd07701"
-  integrity sha512-y38NSXIY37YExCumbGBTL5dXg7pL7XD+Kbe98iEHWFN9yiKJf7t4kKBOkml5ylUDjQIXBnNClGDeRktc1T5dmA==
-  dependencies:
-    magic-string "^0.25.7"
-  optionalDependencies:
-    "@babel/code-frame" "^7.10.4"
-
-rollup-plugin-esbuild@2.6.x, rollup-plugin-esbuild@^2.4.2:
+rollup-plugin-esbuild@2.6.x:
   version "2.6.1"
   resolved "https://registry.npmjs.org/rollup-plugin-esbuild/-/rollup-plugin-esbuild-2.6.1.tgz#5785532940d49adf1bff5b38e9bd9089262d4e7a"
   integrity sha512-hskMEQQ4Vxlyoeg1OWlFTwWHIhpNaw6q+diOT7p9pdkk34m9Mbk3aymS/JbTqLXy/AbJi22iuXrucknKpeczfg==
@@ -11072,7 +11072,7 @@ rollup-plugin-esbuild@2.6.x, rollup-plugin-esbuild@^2.4.2:
     joycon "^2.2.5"
     strip-json-comments "^3.1.1"
 
-rollup-plugin-peer-deps-external@^2.2.2, rollup-plugin-peer-deps-external@^2.2.3:
+rollup-plugin-peer-deps-external@^2.2.2:
   version "2.2.4"
   resolved "https://registry.npmjs.org/rollup-plugin-peer-deps-external/-/rollup-plugin-peer-deps-external-2.2.4.tgz#8a420bbfd6dccc30aeb68c9bf57011f2f109570d"
   integrity sha512-AWdukIM1+k5JDdAqV/Cxd+nejvno2FVLVeZ74NKggm3Q5s9cbbcOgUPGdbxPi4BXu7xGaZ8HG12F+thImYu/0g==
@@ -11121,13 +11121,6 @@ rollup@2.33.x:
   integrity sha512-RpayhPTe4Gu/uFGCmk7Gp5Z9Qic2VsqZ040G+KZZvsZYdcuWaJg678JeDJJvJeEQXminu24a2au+y92CUWVd+w==
   optionalDependencies:
     fsevents "~2.1.2"
-
-rollup@^2.33.1:
-  version "2.39.0"
-  resolved "https://registry.npmjs.org/rollup/-/rollup-2.39.0.tgz#be4f98c9e421793a8fec82c854fb567c35e22ab6"
-  integrity sha512-+WR3bttcq7zE+BntH09UxaW3bQo3vItuYeLsyk4dL2tuwbeSKJuvwiawyhEnvRdRgrII0Uzk00FpctHO/zB1kw==
-  optionalDependencies:
-    fsevents "~2.3.1"
 
 rsvp@^4.8.4:
   version "4.8.5"
