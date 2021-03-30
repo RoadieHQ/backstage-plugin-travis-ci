@@ -4,6 +4,8 @@ export {
    */
   travisciPlugin as plugin,
   travisciPlugin,
+  EntityTravisCIContent,
+  EntityTravisCIOverviewCard,
 } from './plugin';
 export * from './api';
 export {
@@ -12,7 +14,7 @@ export {
    */
   Router,
   /**
-   * @deprecated From 0.2.0 new name 'isTravisciAvalilable' should be used
+   * @deprecated From 0.2.0 new name 'isTravisciAvailable' should be used
    */
   isTravisciAvailable as isPluginApplicableToEntity,
   isTravisciAvailable,

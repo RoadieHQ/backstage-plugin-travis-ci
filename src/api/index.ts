@@ -1,5 +1,4 @@
 import { createApiRef, DiscoveryApi, IdentityApi } from '@backstage/core';
-import fetch from 'cross-fetch';
 
 export type TravisCIBuildResponse = {
   '@type': string;
@@ -97,7 +96,7 @@ export class TravisCIApiClient implements TravisCIApi {
     this.identityApi = options.identityApi;
   }
 
-  async retry(buildNumber: number) {
+  async retry(buildNumber: number): Promise<Response> {
     const idToken = await this.identityApi.getIdToken();
     return fetch(`${await this.getApiUrl()}/build/${buildNumber}/restart`, {
       method: 'post',

@@ -11,7 +11,7 @@
 
 ## How to add Travis-ci project dependency to Backstage app
 
-If you have your own backstage application without this plugin, here it's how to add it:
+If you have your own backstage application without this plugin, here are instructions how to add it:
 
 1. In the `backstage/packages/app` project add the plugin as a `package.json` dependency:
 
@@ -21,7 +21,7 @@ yarn add @roadiehq/backstage-plugin-travis-ci
 
 2. add configuration in `app-config.yaml` file in the root directory:
 
-In the the proxy object: 
+In the proxy object: 
 ```yml
 proxy:
 
@@ -37,20 +37,20 @@ proxy:
       travis-api-version: 3
 ```
 
-as a separate object:
+and as a separate configuration object:
 ```yml
 travisci:
   baseUrl: 'https://travis-ci.com/'
 ```
 
-3. Add plugin to the list of plugins:
+3. Add plugin to the list of plugins within the application plugins file:
 
 ```ts
 // packages/app/src/plugins.ts
 export { plugin as TravisCI } from '@roadiehq/backstage-plugin-travis-ci';
 ```
 
-4. Add plugin to the `entitytPage.tsx` source file:
+4. Add plugin to the `EntityPage.tsx` source file:
 
 ```tsx
 // packages/app/src/components/catalog/EntityPage.tsx
@@ -63,24 +63,24 @@ case isTravisCIAvailable(entity):
 
 Travis-ci plugin is a part of the Backstage sample app. To start using it for your component, you have to:
 
-1. add annotation to the yaml config file of a component:
+1. add an annotation to the yaml config file of a component:
 
 ```yml
 travis-ci.com/repo-slug: <owner-name>/<project-name>
 ```
 
-2. add your developer api key to the environmental variables for your backstage backend server (you can copy it from https://travis-ci.com/account/preferences):
+2. add your developer api key to the environment variables of your backstage backend server (you can find it from https://travis-ci.com/account/preferences):
    `TRAVISCI_AUTH_TOKEN="token <your-api-key>"`
 
-## Develop plugin locally
+## Developing the plugin locally
 
-You can clone the plugin repo into the `plugins/` directory:
+The easiest way is to clone the plugin repo into the `plugins/` directory of your backstage code base:
 
 ```sh
 git clone https://github.com/RoadieHQ/backstage-plugin-travis-ci.git travis-ci
 ```
 
-and run `yarn` in the root backstage directory - it will create a symbolic link so the dependency will be provided from the source code instead of node_modules package.
+and run `yarn` in the root backstage directory - it will create a symbolic link, so the dependency will be provided from the source code instead of node_modules package.
 
 ## Links
 
