@@ -21,7 +21,7 @@ export const Builds: FC = () => {
         <Alert severity="success">Build Restarted.</Alert>
       </Snackbar>
       <ContentHeader title="All builds">
-        <SupportButton email="info@roadie.io" slackChannel="#roadie">
+        <SupportButton>
           This plugin allows you to view and interact with your builds within
           the Travis CI environment.
         </SupportButton>
