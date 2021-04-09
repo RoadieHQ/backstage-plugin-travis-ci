@@ -13,20 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import { useSettings } from './useSettings';
+import { useEntity } from "@backstage/plugin-catalog-react";
 
 export const TRAVIS_ANNOTATION = 'travis-ci.com/repo-slug';
 
 export const useTravisRepoData = () => {
-  const [{ entity }] = useSettings();
+  const { entity } = useEntity();
   const travisSlug = entity?.metadata.annotations?.[TRAVIS_ANNOTATION] ?? '';
   if (!travisSlug) {
-    throw new Error("'Travis-ci.com' annottation is missing");
+    throw new Error("'Travis-ci.com' annotation is missing");
   }
   const slugElements = travisSlug.split('/').map(p => p.trim());
   if (slugElements.length < 2) {
-    throw new Error("'Travis-ci.com' annottation is missing");
+    throw new Error("'Travis-ci.com' annotation is missing");
   }
   return travisSlug;
 };
