@@ -69,7 +69,7 @@ Travis-ci plugin is a part of the Backstage sample app. To start using it for yo
 travis-ci.com/repo-slug: <owner-name>/<project-name>
 ```
 
-2. add your developer api key to the environment variables of your backstage backend server (you can find it from https://travis-ci.com/account/preferences):
+2. add your developer api key to the environment variables of your backstage backend server (you can find it in https://travis-ci.com/account/preferences):
    `TRAVISCI_AUTH_TOKEN="token <your-api-key>"`
 
 ## Developing the plugin locally
