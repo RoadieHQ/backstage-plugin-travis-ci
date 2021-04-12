@@ -33,6 +33,7 @@ import { buildsResponseMock, entityMock } from '../mocks/mocks';
 import { ThemeProvider } from '@material-ui/core';
 import { lightTheme } from '@backstage/theme';
 import { MemoryRouter } from 'react-router-dom';
+import { EntityProvider } from '@backstage/plugin-catalog-react';
 
 const discoveryApi = UrlPatternDiscovery.compile('http://exampleapi.com');
 const errorApiMock = { post: jest.fn(), error$: jest.fn() };
@@ -83,7 +84,9 @@ describe('LastBuildCard', () => {
       <ThemeProvider theme={lightTheme}>
         <MemoryRouter>
           <ApiProvider apis={apis}>
-            <RecentTravisCIBuildsWidget entity={entityMock} />
+            <EntityProvider entity={entityMock}>
+              <RecentTravisCIBuildsWidget entity={entityMock} />
+            </EntityProvider>
           </ApiProvider>
         </MemoryRouter>
       </ThemeProvider>,
