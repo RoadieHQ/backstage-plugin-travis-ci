@@ -43,20 +43,29 @@ travisci:
   baseUrl: 'https://travis-ci.com/'
 ```
 
-3. Add plugin to the list of plugins within the application plugins file:
+3. Import it into your Backstage application:
 
 ```ts
-// packages/app/src/plugins.ts
-export { plugin as TravisCI } from '@roadiehq/backstage-plugin-travis-ci';
+// packages/app/src/components/catalog/EntityPage.tsx
+import {
+  EntityTravisCIContent,
+  EntityTravisCIOverviewCard,
+  isTravisciAvailable,
+} from '@roadiehq/backstage-plugin-travis-ci';
 ```
 
 4. Add plugin to the `EntityPage.tsx` source file:
 
 ```tsx
 // packages/app/src/components/catalog/EntityPage.tsx
-case isTravisCIAvailable(entity):
-    content = <RecentTravisCIBuildsWidget entity={entity} />;
-    break;
+export const cicdContent = (
+  <EntitySwitch>
+    <EntitySwitch.Case if={isTravisciAvailable}>
+      <EntityTravisCIContent />
+    </EntitySwitch.Case>
+    ...
+  </EntitySwitch>
+);
 ```
 
 ## How to use Travis-ci plugin in Backstage
