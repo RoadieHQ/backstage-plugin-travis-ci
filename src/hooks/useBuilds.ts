@@ -1,4 +1,4 @@
-import { configApiRef, errorApiRef, useApi } from '@backstage/core';
+import { configApiRef, errorApiRef, useApi } from '@backstage/core-plugin-api';
 import { useCallback, useEffect, useState } from 'react';
 import { useAsyncRetry } from 'react-use';
 import { travisCIApiRef, TravisCIBuildResponse } from '../api/index';

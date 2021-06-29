@@ -1,4 +1,4 @@
-import { createApiRef, DiscoveryApi, IdentityApi } from '@backstage/core';
+import { createApiRef, DiscoveryApi, IdentityApi } from '@backstage/core-plugin-api';
 
 export type TravisCIBuildResponse = {
   '@type': string;

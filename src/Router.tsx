@@ -15,10 +15,11 @@
  */
 import React from 'react';
 import { Entity } from '@backstage/catalog-model';
-import { Routes, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import { FlatRoutes } from '@backstage/core-app-api';
 import { TravisCIBuildsPage } from './components/TravisCiBuildsPage';
 import { TRAVIS_ANNOTATION } from './hooks/useTravisRepoData';
-import { MissingAnnotationEmptyState } from '@backstage/core';
+import { MissingAnnotationEmptyState } from '@backstage/core-components';
 import { useEntity } from "@backstage/plugin-catalog-react";
 
 export const isTravisciAvailable = (entity: Entity) =>
@@ -34,8 +35,8 @@ export const Router = (_props: Props) =>{
   return !isTravisciAvailable(entity) ? (
       <MissingAnnotationEmptyState annotation={TRAVIS_ANNOTATION} />
   ) : (
-      <Routes>
+      <FlatRoutes>
         <Route path="/" element={<TravisCIBuildsPage entity={entity} />} />
-      </Routes>
+      </FlatRoutes>
   );
 };

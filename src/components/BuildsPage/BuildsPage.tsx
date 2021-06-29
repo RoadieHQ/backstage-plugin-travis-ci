@@ -2,7 +2,7 @@ import React, { FC, useState, useCallback } from 'react';
 import { Snackbar } from '@material-ui/core';
 import { Builds as BuildsComp } from './lib/Builds';
 import { Alert } from '@material-ui/lab';
-import { ContentHeader, SupportButton } from '@backstage/core';
+import { ContentHeader, SupportButton } from '@backstage/core-components';
 
 export const Builds: FC = () => {
   const [restarted, setRestarted] = useState(false);
