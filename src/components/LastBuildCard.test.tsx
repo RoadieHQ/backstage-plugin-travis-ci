@@ -17,13 +17,15 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import {
+  IdentityApi,
+  errorApiRef,
+  configApiRef
+} from '@backstage/core-plugin-api';
+import {
   ApiRegistry,
   ApiProvider,
-  IdentityApi,
-  UrlPatternDiscovery,
-  errorApiRef,
-  configApiRef,
-} from '@backstage/core';
+  UrlPatternDiscovery
+} from '@backstage/core-app-api';
 import { rest } from 'msw';
 import { msw } from '@backstage/test-utils';
 import { setupServer } from 'msw/node';
