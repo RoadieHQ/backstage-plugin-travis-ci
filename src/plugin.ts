@@ -6,7 +6,7 @@ import {
   createRouteRef,
   discoveryApiRef,
   identityApiRef,
-} from '@backstage/core';
+} from '@backstage/core-plugin-api';
 import { TravisCIApiClient, travisCIApiRef } from './api';
 
 export const entityContentRouteRef = createRouteRef({

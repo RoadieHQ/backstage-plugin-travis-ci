@@ -18,7 +18,7 @@ import { Entity } from '@backstage/catalog-model';
 import { Routes, Route } from 'react-router-dom';
 import { TravisCIBuildsPage } from './components/TravisCiBuildsPage';
 import { TRAVIS_ANNOTATION } from './hooks/useTravisRepoData';
-import { MissingAnnotationEmptyState } from '@backstage/core';
+import { MissingAnnotationEmptyState } from '@backstage/core-components';
 import { useEntity } from "@backstage/plugin-catalog-react";
 
 export const isTravisciAvailable = (entity: Entity) =>

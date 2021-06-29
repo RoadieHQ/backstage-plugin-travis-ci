@@ -9,7 +9,7 @@ import {
   StatusRunning,
   Table,
   TableColumn,
-} from '@backstage/core';
+} from '@backstage/core-components';
 import formatDistance from 'date-fns/formatDistance';
 import { TravisIcon } from './travisIcon';
 
