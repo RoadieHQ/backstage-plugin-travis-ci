@@ -31,9 +31,7 @@ proxy:
     target: https://api.travis-ci.com
     changeOrigin: true
     headers:
-      Authorization:
-        $secret:
-          env: TRAVISCI_AUTH_TOKEN
+      Authorization: ${TRAVISCI_AUTH_TOKEN}
       travis-api-version: 3
 ```
 
@@ -72,13 +70,14 @@ export const cicdContent = (
 
 Travis-ci plugin is a part of the Backstage sample app. To start using it for your component, you have to:
 
-1. add an annotation to the yaml config file of a component:
+1. Add an annotation to the yaml config file of a component:
 
 ```yml
 travis-ci.com/repo-slug: <owner-name>/<project-name>
 ```
 
-2. add your developer api key to the environment variables of your backstage backend server (you can find it in https://travis-ci.com/account/preferences):
+2. Add your developer api key to the environment variables of your backstage backend server (you can find it in https://travis-ci.com/account/preferences), in the form of the word 'token' followed by your api key. So it should look like this:
+
    `TRAVISCI_AUTH_TOKEN="token <your-api-key>"`
 
 ## Developing the plugin locally
@@ -89,7 +88,7 @@ The easiest way is to clone the plugin repo into the `plugins/` directory of you
 git clone https://github.com/RoadieHQ/backstage-plugin-travis-ci.git travis-ci
 ```
 
-and run `yarn` in the root backstage directory - it will create a symbolic link, so the dependency will be provided from the source code instead of node_modules package.
+and run `yarn install` in the root backstage directory - it will create a symbolic link, so the dependency will be provided from the source code instead of node_modules package.
 
 ## Links
 
