@@ -66,6 +66,21 @@ export const cicdContent = (
 );
 ```
 
+5. Add a recent Travis-CI builds widget/card to the overview tab to the [entityPage.tsx](https://github.com/backstage/backstage/blob/master/packages/app/src/components/catalog/EntityPage.tsx) source file:
+
+```tsx
+export const cicdCard = (
+  <EntitySwitch>
+    <EntitySwitch.Case if={isTravisciAvailable}>
+        <Grid item sm={6}>
+          <EntityTravisCIOverviewCard />
+        </Grid>
+    </EntitySwitch.Case>
+  </EntitySwitch>
+);
+
+```
+
 ## How to use Travis-ci plugin in Backstage
 
 Travis-ci plugin is a part of the Backstage sample app. To start using it for your component, you have to:
