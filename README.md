@@ -64,6 +64,17 @@ export const cicdContent = (
     ...
   </EntitySwitch>
 );
+
+export const cicdCard = (
+  <EntitySwitch>
+    <EntitySwitch.Case if={isTravisciAvailable}>
+        <Grid item sm={6}>
+          <EntityTravisCIOverviewCard />
+        </Grid>
+    </EntitySwitch.Case>
+  </EntitySwitch>
+);
+
 ```
 
 ## How to use Travis-ci plugin in Backstage
