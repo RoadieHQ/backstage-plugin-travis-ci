@@ -64,7 +64,11 @@ export const cicdContent = (
     ...
   </EntitySwitch>
 );
+```
 
+5. Add a recent Travis-CI builds widget/card to the overview tab to the [entityPage.tsx](https://github.com/backstage/backstage/blob/master/packages/app/src/components/catalog/EntityPage.tsx) source file:
+
+```tsx
 export const cicdCard = (
   <EntitySwitch>
     <EntitySwitch.Case if={isTravisciAvailable}>
