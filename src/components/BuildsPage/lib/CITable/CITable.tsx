@@ -158,8 +158,8 @@ export const CITable: FC<Props> = ({
           },
         ]}
         data={builds}
-        onChangePage={onChangePage}
-        onChangeRowsPerPage={onChangePageSize}
+        onPageChange={onChangePage}
+        onRowsPerPageChange={onChangePageSize}
         title={
           <Box display="flex" alignItems="center">
             <TravisIcon />
