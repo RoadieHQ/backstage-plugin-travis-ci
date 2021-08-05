@@ -27,7 +27,7 @@ import {
   UrlPatternDiscovery
 } from '@backstage/core-app-api';
 import { rest } from 'msw';
-import {msw, wrapInTestApp} from '@backstage/test-utils';
+import { msw, wrapInTestApp } from '@backstage/test-utils';
 import { setupServer } from 'msw/node';
 import { TravisCIApiClient, travisCIApiRef } from '../api';
 import { RecentTravisCIBuildsWidget } from '..';
