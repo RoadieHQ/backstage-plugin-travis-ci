@@ -27,14 +27,11 @@ import {
   UrlPatternDiscovery
 } from '@backstage/core-app-api';
 import { rest } from 'msw';
-import { msw } from '@backstage/test-utils';
+import { msw, wrapInTestApp } from '@backstage/test-utils';
 import { setupServer } from 'msw/node';
 import { TravisCIApiClient, travisCIApiRef } from '../api';
 import { RecentTravisCIBuildsWidget } from '..';
 import { buildsResponseMock, entityMock } from '../mocks/mocks';
-import { ThemeProvider } from '@material-ui/core';
-import { lightTheme } from '@backstage/theme';
-import { MemoryRouter } from 'react-router-dom';
 import { EntityProvider } from '@backstage/plugin-catalog-react';
 
 const discoveryApi = UrlPatternDiscovery.compile('http://exampleapi.com');
@@ -71,27 +68,24 @@ describe('LastBuildCard', () => {
     // jest.resetAllMocks();
     worker.use(
       rest.get(
-        'http://exampleapi.com/travisci/api/repo/RoadieHQ%2Fsample-service/builds?offset=0&limit=1',
+        'http://exampleapi.com/travisci/api/repo/RoadieHQ%2Fsample-service/builds',
         (_, res, ctx) => res(ctx.json(buildsResponseMock)),
       ),
       rest.get(
-        'http://exampleapi.com/travisci/api/repo/RoadieHQ%2Fsample-service/builds?offset=0&limit=5',
+        'http://exampleapi.com/travisci/api/repo/RoadieHQ%2Fsample-service/builds',
         (_, res, ctx) => res(ctx.json(buildsResponseMock)),
       ),
     );
   });
 
   it('should display widget with data', async () => {
-    const rendered = render(
-      <ThemeProvider theme={lightTheme}>
-        <MemoryRouter>
+    const rendered = render(wrapInTestApp(
           <ApiProvider apis={apis}>
             <EntityProvider entity={entityMock}>
               <RecentTravisCIBuildsWidget entity={entityMock} />
             </EntityProvider>
           </ApiProvider>
-        </MemoryRouter>
-      </ThemeProvider>,
+        )
     );
     expect(
       await rendered.findByText(buildsResponseMock.builds[2].commit.message),
