@@ -21,11 +21,11 @@ export const useTravisRepoData = () => {
   const { entity } = useEntity();
   const travisSlug = entity?.metadata.annotations?.[TRAVIS_ANNOTATION] ?? '';
   if (!travisSlug) {
-    throw new Error("'Travis-ci.com' annotation is missing");
+    throw new Error("'travis-ci.com/repo-slug' annotation is missing");
   }
   const slugElements = travisSlug.split('/').map(p => p.trim());
   if (slugElements.length < 2) {
-    throw new Error("'Travis-ci.com' annotation is missing");
+    throw new Error("'travis-ci.com/repo-slug' annotation is missing");
   }
   return travisSlug;
 };
