@@ -1250,7 +1250,7 @@
     git-url-parse "~11.4.4"
     luxon "^1.25.0"
 
-"@backstage/plugin-catalog-react@^0.4.1":
+"@backstage/plugin-catalog-react@^0.4.0", "@backstage/plugin-catalog-react@^0.4.1":
   version "0.4.1"
   resolved "https://registry.npmjs.org/@backstage/plugin-catalog-react/-/plugin-catalog-react-0.4.1.tgz#f009325c013e21ebc144f9d0ac61d9e360998152"
   integrity sha512-nLBfdAkxt1EwzVPYBWwPQLxIj2bY4zCdKrPA+HkNdGUADJphXBlxYvtdG3Tt447bG66C+Tw4pb/xYzE2RDwIrQ==
@@ -1305,7 +1305,7 @@
     react-router-dom "6.0.0-beta.0"
     zen-observable "^0.8.15"
 
-"@backstage/theme@^0.2.9":
+"@backstage/theme@^0.2.6", "@backstage/theme@^0.2.9":
   version "0.2.9"
   resolved "https://registry.npmjs.org/@backstage/theme/-/theme-0.2.9.tgz#ab8352c1652061563672bd62b387fa013e081a92"
   integrity sha512-W3pne/Z6YQDN7OjhYdC7KYvuJyQ8WaIKWq/ss9CgnT9KFmN6fVuCcTwKLOIQYkLe4PDhOU0TF5/IodL4EM4NBw==
